@@ -11,12 +11,11 @@ while [[ "$current" < "$END_DATE" || "$current" == "$END_DATE" ]]; do
     echo "Daily activity for $current" > history_$current.txt
 
     git add .
-    
+
     GIT_AUTHOR_DATE="$current 12:00:00" \
     GIT_COMMITTER_DATE="$current 12:00:00" \
     git commit -m "Daily auto commit for $current"
 
-    # Increment by 1 day
-    current=$(date -I -d "$current + 1 day")
+    # macOS-compatible date increment
+    current=$(date -j -v+1d -f "%Y-%m-%d" "$current" +"%Y-%m-%d")
 done
-
