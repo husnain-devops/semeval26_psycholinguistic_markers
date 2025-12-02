@@ -1,0 +1,25 @@
+pandas
+numpy<2.0.0,>=1.24.0
+matplotlib
+seaborn
+scikit-learn
+gensim
+nltk
+spacy
+textstat
+lexicalrichness
+sentence-transformers
+bertopic
+umap-learn
+hdbscan
+pyldavis
+tqdm
+joblib
+shap
+imbalanced-learn
+wordcloud
+yellowbrick
+transformers
+torch
+
+# Note: some packages may require additional system dependencies (e.g., C compilers). Install in a virtualenv.

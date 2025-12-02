@@ -172,3 +172,11 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+
+EDA-Rehydrated.zip
+
+EDA-Rehydrated/models/
+EDA-Rehydrated/embeddings/
+EDA-Rehydrated/figures/
+EDA-Rehydrated/data_processed/

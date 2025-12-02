@@ -1,0 +1,32 @@
+{
+  "cant_tell": {
+    "ttr_mean": 0.8058483526645117,
+    "ttr_std": 0.09723188787157887,
+    "hapax_ratio_mean": 0.6865724772437906,
+    "hapax_ratio_std": 0.14134617219850312,
+    "avg_word_len_mean": 4.617019886911268,
+    "avg_word_len_std": 0.4603249132513099,
+    "shannon_entropy_mean": 5.209629702125563,
+    "shannon_entropy_std": 0.5348584769320482
+  },
+  "no": {
+    "ttr_mean": 0.7889155216357142,
+    "ttr_std": 0.0904979200218976,
+    "hapax_ratio_mean": 0.6597989127931093,
+    "hapax_ratio_std": 0.12553573698104542,
+    "avg_word_len_mean": 4.646414397491471,
+    "avg_word_len_std": 0.5046623061936902,
+    "shannon_entropy_mean": 5.212556194347979,
+    "shannon_entropy_std": 0.5366481913177249
+  },
+  "yes": {
+    "ttr_mean": 0.7934482914942578,
+    "ttr_std": 0.08735285367107067,
+    "hapax_ratio_mean": 0.664751671837742,
+    "hapax_ratio_std": 0.1231478764029746,
+    "avg_word_len_mean": 4.668300258116246,
+    "avg_word_len_std": 0.47174677176116125,
+    "shannon_entropy_mean": 5.231247822730056,
+    "shannon_entropy_std": 0.5207748644584803
+  }
+}
