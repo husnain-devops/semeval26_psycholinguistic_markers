@@ -47,41 +47,99 @@ def main():
         if alt.exists():
             src = alt
         else:
-            msg = f"INPUT MISSING: {src} and {alt} not found"
-            append_log(msg)
-            return
+            # try absolute path from workspace root (going up two levels from code/)
+            abs_path = BASE.parent.parent / "train_rehydrated.jsonl"
+            if abs_path.exists():
+                src = abs_path
+            else:
+                msg = f"INPUT MISSING: {src}, {alt}, and {abs_path} not found"
+                append_log(msg)
+                return
     records = []
-    marker_counts = {"Actor":0,"Victim":0,"Evidence":0,"Action":0,"Effect":0}
     total_words = []
+    # Track duplicate IDs to handle them
+    id_to_records = {}
+    
     with open(src, "r", encoding="utf-8") as f:
-        for line in f:
+        for line_num, line in enumerate(f, 1):
             try:
                 obj = json.loads(line)
             except Exception as e:
-                append_log(f"json parse error: {e}")
+                append_log(f"json parse error at line {line_num}: {e}")
                 continue
             _id = obj.get("_id") or obj.get("id")
             text = obj.get("text") or obj.get("post_text") or obj.get("content")
-            subreddit = obj.get("subreddit") or obj.get("subreddit_name")
-            conspiracy = normalize_label(obj.get("conspiracy" ) or obj.get("label"))
-            markers = obj.get("markers") or obj.get("marker")
-            rec = {"_id":_id, "text": text, "subreddit": subreddit, "conspiracy": conspiracy, "markers": markers}
+            conspiracy = normalize_label(obj.get("conspiracy") or obj.get("label"))
+            
+            # Only extract _id, text, and conspiracy
+            rec = {"_id": _id, "text": text, "conspiracy": conspiracy, "line_num": line_num}
             records.append(rec)
+            
+            # Track duplicates
+            if _id not in id_to_records:
+                id_to_records[_id] = []
+            id_to_records[_id].append(rec)
+            
             if text:
                 total_words.append(len(str(text).split()))
-            if markers and isinstance(markers, dict):
-                for k in marker_counts.keys():
-                    if markers.get(k):
-                        marker_counts[k] += 1
+    
+    # Handle duplicate IDs
+    duplicate_differ_count = 0
+    duplicate_same_count = 0
+    records_to_remove = set()  # Use set of line numbers to track records to remove
+    
+    for _id, recs in id_to_records.items():
+        if len(recs) > 1:
+            # Check if text or conspiracy differs
+            texts = [str(r["text"]) for r in recs]
+            conspiracies = [r["conspiracy"] for r in recs]
+            unique_texts = set(texts)
+            unique_conspiracies = set(conspiracies)
+            
+            # If text or conspiracy differs, append suffix to all duplicates
+            if len(unique_texts) > 1 or len(unique_conspiracies) > 1:
+                duplicate_differ_count += 1
+                for idx, rec in enumerate(recs):
+                    original_id = rec["_id"]
+                    rec["_id"] = f"{original_id}_{idx + 1}"
+                append_log(f"Duplicate ID {_id} with differing text/conspiracy: renamed {len(recs)} records to {_id}_1, {_id}_2, etc.")
+            else:
+                # Identical duplicates - keep only the first one, mark others for removal
+                duplicate_same_count += 1
+                original_id = recs[0]["_id"]
+                # Mark all but the first record for removal
+                for rec_to_remove in recs[1:]:
+                    records_to_remove.add(rec_to_remove["line_num"])
+                append_log(f"Duplicate ID {_id} with identical text/conspiracy: kept first record, removing {len(recs)-1} duplicate(s)")
+    
+    # Filter out records marked for removal
+    records = [rec for rec in records if rec.get("line_num") not in records_to_remove]
+    
+    # Rebuild total_words to match filtered records
+    total_words = []
+    for rec in records:
+        text = rec.get("text")
+        if text:
+            total_words.append(len(str(text).split()))
+    
+    if duplicate_differ_count > 0:
+        append_log(f"[data_ingest] Found {duplicate_differ_count} IDs with duplicates that have differing text/conspiracy values (renamed)")
+    if duplicate_same_count > 0:
+        append_log(f"[data_ingest] Found {duplicate_same_count} IDs with identical duplicates (removed duplicates, kept first)")
+    
+    # Remove line_num before creating DataFrame
+    for rec in records:
+        rec.pop("line_num", None)
+    
     df = pd.DataFrame(records)
-    # ensure columns
-    df = df[["_id","text","subreddit","conspiracy","markers"]]
+    # ensure columns - only _id, text, and conspiracy
+    df = df[["_id", "text", "conspiracy"]]
     out_csv = PROC / "data_clean.csv"
     df.to_csv(out_csv, index=False)
+    
     summary = {
         "total_rows": int(len(df)),
         "distribution": df['conspiracy'].value_counts().to_dict(),
-        "marker_counts": marker_counts,
         "mean_words": float(pd.Series(total_words).mean()) if total_words else 0,
         "median_words": float(pd.Series(total_words).median()) if total_words else 0,
         "min_words": int(pd.Series(total_words).min()) if total_words else 0,
