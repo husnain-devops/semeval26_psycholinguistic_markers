@@ -47,3 +47,6 @@ ipykernel>=6.25.0  # For Jupyter notebook support
 # 
 # IMPORTANT: PyTorch should be installed separately using the recreate_venv.sh script
 # or manually with: pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
+
+tabulate
+SentencePiece
