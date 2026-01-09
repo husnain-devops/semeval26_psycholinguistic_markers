@@ -1,0 +1,76 @@
+{
+  "best_global_step": 60,
+  "best_metric": 1.0373914241790771,
+  "best_model_checkpoint": "./roberta-large-conspiracy-classification-lora/checkpoint-60",
+  "epoch": 3.0,
+  "eval_steps": 500,
+  "global_step": 60,
+  "is_hyper_param_search": false,
+  "is_local_process_zero": true,
+  "is_world_process_zero": true,
+  "log_history": [
+    {
+      "epoch": 1.0,
+      "eval_accuracy": 0.471875,
+      "eval_f1_macro": 0.2298850574712644,
+      "eval_f1_weighted": 0.31681034482758624,
+      "eval_loss": 1.0406429767608643,
+      "eval_runtime": 1.2867,
+      "eval_samples_per_second": 286.773,
+      "eval_steps_per_second": 2.331,
+      "step": 20
+    },
+    {
+      "epoch": 2.0,
+      "eval_accuracy": 0.45625,
+      "eval_f1_macro": 0.23773967551622419,
+      "eval_f1_weighted": 0.32260266869469023,
+      "eval_loss": 1.0426057577133179,
+      "eval_runtime": 1.3244,
+      "eval_samples_per_second": 278.627,
+      "eval_steps_per_second": 2.265,
+      "step": 40
+    },
+    {
+      "epoch": 3.0,
+      "eval_accuracy": 0.471875,
+      "eval_f1_macro": 0.21922562221069686,
+      "eval_f1_weighted": 0.3060337789815402,
+      "eval_loss": 1.0373914241790771,
+      "eval_runtime": 1.3199,
+      "eval_samples_per_second": 279.557,
+      "eval_steps_per_second": 2.273,
+      "step": 60
+    }
+  ],
+  "logging_steps": 100,
+  "max_steps": 400,
+  "num_input_tokens_seen": 0,
+  "num_train_epochs": 20,
+  "save_steps": 500,
+  "stateful_callbacks": {
+    "EarlyStoppingCallback": {
+      "args": {
+        "early_stopping_patience": 2,
+        "early_stopping_threshold": 0.01
+      },
+      "attributes": {
+        "early_stopping_patience_counter": 2
+      }
+    },
+    "TrainerControl": {
+      "args": {
+        "should_epoch_stop": false,
+        "should_evaluate": false,
+        "should_log": false,
+        "should_save": true,
+        "should_training_stop": true
+      },
+      "attributes": {}
+    }
+  },
+  "total_flos": 4704715696556160.0,
+  "train_batch_size": 160,
+  "trial_name": null,
+  "trial_params": null
+}
