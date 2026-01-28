@@ -196,9 +196,9 @@ EDA-Rehydrated/notebooks/distilbert-conspiracy-classification-with-features/
 distilbert-*
 roberta-base-conspiracy-classification-lora/
 roberta-large-binary-conspiracy-lora/
-/home/husnain/semeval26_psycholinguistic_markers/Markers-Extraction/models/
-/home/husnain/semeval26_psycholinguistic_markers/roberta-large-single-type-simplified-Actor
-/home/husnain/semeval26_psycholinguistic_markers/roberta-large-single-type-simplified-Action
-/home/husnain/semeval26_psycholinguistic_markers/roberta-large-single-type-simplified-Effect
-/home/husnain/semeval26_psycholinguistic_markers/roberta-large-single-type-simplified-Evidence
-/home/husnain/semeval26_psycholinguistic_markers/roberta-large-single-type-simplified-Victim
+Markers-Extraction/models/
+roberta-large-single-type-simplified-Actor/
+roberta-large-single-type-simplified-Action/
+roberta-large-single-type-simplified-Effect/
+roberta-large-single-type-simplified-Evidence/ 
+roberta-large-single-type-simplified-Victim/

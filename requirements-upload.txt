@@ -1,0 +1,4 @@
+# Extra deps for upload_*_hf.py and upload_all_hf.py
+huggingface_hub>=0.20.0
+peft>=0.10.0
+transformers>=4.36.0

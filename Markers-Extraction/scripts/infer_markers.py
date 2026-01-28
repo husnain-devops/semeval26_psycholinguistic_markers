@@ -57,15 +57,15 @@ def extract_markers_from_tokens(text, token_offsets, predicted_labels, id_to_lab
             # Start new marker
             marker_type = label[2:]  # Remove 'B-'
             current_marker = {
-                'startIndex': offset[0],
-                'endIndex': offset[1],
+                'startIndex': int(offset[0]),
+                'endIndex': int(offset[1]),
                 'type': marker_type
             }
         
         elif label.startswith('I-'):
             # Continue current marker
             if current_marker and label[2:] == current_marker['type']:
-                current_marker['endIndex'] = offset[1]
+                current_marker['endIndex'] = int(offset[1])
             # If no current marker or different type, skip
         
         else:  # 'O' label

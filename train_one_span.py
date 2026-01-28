@@ -1,5 +1,5 @@
 import json
-from transformers import DistilBertTokenizerFast, DistilBertForTokenClassification
+from transformers import RobertaTokenizerFast, RobertaForTokenClassification
 from transformers import TrainingArguments, Trainer, DataCollatorForTokenClassification
 from datasets import Dataset
 
@@ -53,8 +53,8 @@ def tokenize_and_align_labels_simplified(examples, tokenizer, label_to_id, marke
 
 if __name__ == "__main__":
     train_file = "train_rehydrated.jsonl"
-    model_name = "distilbert-base-uncased"
-    output_dir_base = "distilbert-single-type-simplified"
+    model_name = "roberta-large" #"distilbert-base-uncased"
+    output_dir_base = "roberta-large-single-type-simplified"
     batch_size = 16
     learning_rate = 2e-5
     num_epochs = 10
@@ -65,7 +65,7 @@ if __name__ == "__main__":
     train_data = load_data(train_file)
     train_dataset = Dataset.from_list(train_data)
 
-    tokenizer = DistilBertTokenizerFast.from_pretrained(model_name)
+    tokenizer = RobertaTokenizerFast.from_pretrained(model_name)
 
     for marker_type in marker_types_to_train:
         print(f"\n--- Training simplified model for marker type: {marker_type} ---")
@@ -84,7 +84,7 @@ if __name__ == "__main__":
         )
 
         # Load a new model for each marker type (now with 2 output labels)
-        model = DistilBertForTokenClassification.from_pretrained(model_name, num_labels=num_labels)
+        model = RobertaForTokenClassification.from_pretrained(model_name, num_labels=num_labels)
 
         # Define training arguments
         output_dir = f"{output_dir_base}-{marker_type}"

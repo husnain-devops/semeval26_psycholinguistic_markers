@@ -6,20 +6,20 @@ import os
 import glob
 from datasets import Dataset
 from transformers import (
-    DistilBertTokenizerFast,
-    DistilBertForTokenClassification,
+    RobertaTokenizerFast,
+    RobertaForTokenClassification,
     Trainer,
     DataCollatorForTokenClassification,
     TrainingArguments,
 )
 from collections import defaultdict
 
-MODEL_PATH_BASE = "distilbert-single-type-simplified"
+MODEL_PATH_BASE = "roberta-large-single-type-simplified"
 MARKER_TYPES_TO_INFER = ["Action", "Actor", "Effect", "Evidence", "Victim"]
 TEST_FILE = "dev_rehydrated.jsonl"
 SUBMISSION_FILE = "submission.jsonl"
-MODEL_NAME = "distilbert-base-uncased"
-BATCH_SIZE = 64
+MODEL_NAME = "roberta-large"
+BATCH_SIZE = 8  # Reduced batch size for larger model
 
 
 def find_latest_checkpoint(base_path, marker_type):
@@ -193,7 +193,7 @@ if __name__ == '__main__':
 
     test_dataset = Dataset.from_list(raw_data)
 
-    tokenizer = DistilBertTokenizerFast.from_pretrained(MODEL_NAME)
+    tokenizer = RobertaTokenizerFast.from_pretrained(MODEL_NAME)
 
     dummy_label_to_id = {"O": 0}
 
@@ -220,7 +220,7 @@ if __name__ == '__main__':
 
         try:
             # Load the model.
-            model = DistilBertForTokenClassification.from_pretrained(model_directory)
+            model = RobertaForTokenClassification.from_pretrained(model_directory)
 
             # Manually define the id_to_label mapping for the binary model (0=O, 1=TYPE)
             # This ensures the correct marker type name is used instead of generic 'LABEL_1'.

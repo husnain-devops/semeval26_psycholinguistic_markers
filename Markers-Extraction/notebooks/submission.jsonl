@@ -1,0 +1,100 @@
+{"_id": "t1_emz6exn", "markers": [{"startIndex": 16, "endIndex": 21, "type": "Actor"}, {"startIndex": 34, "endIndex": 44, "type": "Actor"}, {"startIndex": 48, "endIndex": 57, "type": "Action"}, {"startIndex": 82, "endIndex": 93, "type": "Actor"}, {"startIndex": 94, "endIndex": 97, "type": "Action"}, {"startIndex": 294, "endIndex": 299, "type": "Actor"}]}
+{"_id": "t1_f07ejkp", "markers": [{"startIndex": 0, "endIndex": 7, "type": "Actor"}, {"startIndex": 20, "endIndex": 34, "type": "Actor"}, {"startIndex": 35, "endIndex": 56, "type": "Action"}, {"startIndex": 108, "endIndex": 120, "type": "Victim"}, {"startIndex": 128, "endIndex": 145, "type": "Evidence"}, {"startIndex": 174, "endIndex": 179, "type": "Victim"}, {"startIndex": 211, "endIndex": 216, "type": "Victim"}]}
+{"_id": "t1_f6mnlr1", "markers": [{"startIndex": 43, "endIndex": 46, "type": "Actor"}]}
+{"_id": "t1_iiv2878", "markers": [{"startIndex": 79, "endIndex": 87, "type": "Action"}, {"startIndex": 88, "endIndex": 93, "type": "Actor"}]}
+{"_id": "t1_gs39jid", "markers": [{"startIndex": 24, "endIndex": 29, "type": "Action"}, {"startIndex": 81, "endIndex": 94, "type": "Actor"}, {"startIndex": 251, "endIndex": 265, "type": "Victim"}]}
+{"_id": "t1_jn62qay", "markers": [{"startIndex": 82, "endIndex": 97, "type": "Actor"}, {"startIndex": 110, "endIndex": 118, "type": "Action"}]}
+{"_id": "t1_fwur2wo", "markers": [{"startIndex": 102, "endIndex": 114, "type": "Actor"}]}
+{"_id": "t1_e2y172o", "markers": [{"startIndex": 0, "endIndex": 26, "type": "Actor"}, {"startIndex": 106, "endIndex": 132, "type": "Actor"}, {"startIndex": 220, "endIndex": 246, "type": "Actor"}, {"startIndex": 338, "endIndex": 347, "type": "Actor"}, {"startIndex": 358, "endIndex": 362, "type": "Actor"}, {"startIndex": 571, "endIndex": 585, "type": "Actor"}, {"startIndex": 618, "endIndex": 621, "type": "Actor"}]}
+{"_id": "t1_gxljbtn", "markers": [{"startIndex": 37, "endIndex": 61, "type": "Actor"}, {"startIndex": 110, "endIndex": 119, "type": "Action"}, {"startIndex": 123, "endIndex": 135, "type": "Action"}, {"startIndex": 248, "endIndex": 254, "type": "Action"}]}
+{"_id": "t1_hr224k8", "markers": [{"startIndex": 73, "endIndex": 80, "type": "Action"}]}
+{"_id": "t1_f8vy04o", "markers": [{"startIndex": 38, "endIndex": 50, "type": "Actor"}, {"startIndex": 51, "endIndex": 56, "type": "Action"}]}
+{"_id": "t1_ef0gnwp", "markers": []}
+{"_id": "t1_icz6pu9", "markers": []}
+{"_id": "t1_he2rz0z", "markers": [{"startIndex": 9, "endIndex": 49, "type": "Action"}]}
+{"_id": "t1_fo1y982", "markers": [{"startIndex": 0, "endIndex": 17, "type": "Actor"}, {"startIndex": 130, "endIndex": 132, "type": "Actor"}, {"startIndex": 217, "endIndex": 221, "type": "Victim"}]}
+{"_id": "t1_k3vr1pl", "markers": []}
+{"_id": "t1_ja4fqdn", "markers": [{"startIndex": 5, "endIndex": 8, "type": "Actor"}, {"startIndex": 53, "endIndex": 60, "type": "Action"}, {"startIndex": 66, "endIndex": 68, "type": "Actor"}]}
+{"_id": "t1_d9xg8p5", "markers": [{"startIndex": 120, "endIndex": 136, "type": "Actor"}]}
+{"_id": "t1_itjkgh4", "markers": [{"startIndex": 88, "endIndex": 92, "type": "Actor"}, {"startIndex": 120, "endIndex": 122, "type": "Victim"}]}
+{"_id": "t1_gsyqq3c", "markers": [{"startIndex": 27, "endIndex": 34, "type": "Actor"}, {"startIndex": 50, "endIndex": 71, "type": "Actor"}, {"startIndex": 77, "endIndex": 86, "type": "Action"}, {"startIndex": 489, "endIndex": 498, "type": "Actor"}]}
+{"_id": "t1_j42wniy", "markers": [{"startIndex": 182, "endIndex": 198, "type": "Actor"}]}
+{"_id": "t1_hbqow6d", "markers": [{"startIndex": 25, "endIndex": 43, "type": "Actor"}, {"startIndex": 210, "endIndex": 218, "type": "Actor"}]}
+{"_id": "t1_ivimr2e", "markers": [{"startIndex": 4, "endIndex": 9, "type": "Actor"}, {"startIndex": 70, "endIndex": 90, "type": "Action"}]}
+{"_id": "t1_jnra6w0", "markers": [{"startIndex": 81, "endIndex": 88, "type": "Victim"}, {"startIndex": 142, "endIndex": 146, "type": "Actor"}, {"startIndex": 165, "endIndex": 167, "type": "Victim"}]}
+{"_id": "t1_gej7l9h", "markers": [{"startIndex": 113, "endIndex": 138, "type": "Action"}, {"startIndex": 172, "endIndex": 176, "type": "Actor"}]}
+{"_id": "t1_gszcyxn", "markers": [{"startIndex": 15, "endIndex": 25, "type": "Actor"}, {"startIndex": 26, "endIndex": 35, "type": "Action"}, {"startIndex": 38, "endIndex": 48, "type": "Actor"}, {"startIndex": 59, "endIndex": 66, "type": "Action"}, {"startIndex": 249, "endIndex": 254, "type": "Actor"}, {"startIndex": 291, "endIndex": 303, "type": "Actor"}]}
+{"_id": "t1_f31prdh", "markers": [{"startIndex": 8, "endIndex": 17, "type": "Victim"}, {"startIndex": 31, "endIndex": 43, "type": "Actor"}, {"startIndex": 49, "endIndex": 87, "type": "Action"}, {"startIndex": 172, "endIndex": 190, "type": "Effect"}, {"startIndex": 198, "endIndex": 205, "type": "Victim"}]}
+{"_id": "t1_fed52vz", "markers": [{"startIndex": 37, "endIndex": 50, "type": "Actor"}, {"startIndex": 218, "endIndex": 226, "type": "Actor"}, {"startIndex": 227, "endIndex": 275, "type": "Action"}, {"startIndex": 282, "endIndex": 285, "type": "Victim"}, {"startIndex": 286, "endIndex": 293, "type": "Victim"}, {"startIndex": 351, "endIndex": 360, "type": "Actor"}]}
+{"_id": "t1_jss2xpx", "markers": [{"startIndex": 51, "endIndex": 60, "type": "Actor"}]}
+{"_id": "t1_h7voj4w", "markers": [{"startIndex": 250, "endIndex": 253, "type": "Actor"}]}
+{"_id": "t1_jvysxg3", "markers": []}
+{"_id": "t1_ghj0zpf", "markers": []}
+{"_id": "t1_ig63qjn", "markers": [{"startIndex": 76, "endIndex": 94, "type": "Action"}]}
+{"_id": "t1_inlq748", "markers": [{"startIndex": 0, "endIndex": 4, "type": "Actor"}, {"startIndex": 57, "endIndex": 64, "type": "Actor"}]}
+{"_id": "t1_ge5hkqs", "markers": [{"startIndex": 25, "endIndex": 32, "type": "Actor"}, {"startIndex": 82, "endIndex": 90, "type": "Effect"}, {"startIndex": 91, "endIndex": 97, "type": "Victim"}]}
+{"_id": "t1_du2sjah", "markers": []}
+{"_id": "t1_gl19ify", "markers": [{"startIndex": 0, "endIndex": 11, "type": "Actor"}, {"startIndex": 350, "endIndex": 353, "type": "Actor"}]}
+{"_id": "t1_h95q8z9", "markers": [{"startIndex": 13, "endIndex": 31, "type": "Actor"}]}
+{"_id": "t1_j3q3rmy", "markers": [{"startIndex": 174, "endIndex": 179, "type": "Actor"}]}
+{"_id": "t1_j5gbh3w", "markers": [{"startIndex": 0, "endIndex": 61, "type": "Actor"}, {"startIndex": 83, "endIndex": 152, "type": "Action"}]}
+{"_id": "t1_fywb2mw", "markers": []}
+{"_id": "t1_hvnzj9o", "markers": []}
+{"_id": "t1_dziugsc", "markers": [{"startIndex": 0, "endIndex": 8, "type": "Actor"}]}
+{"_id": "t1_dtzcrz0", "markers": []}
+{"_id": "t1_ep7h4y2", "markers": [{"startIndex": 0, "endIndex": 16, "type": "Actor"}, {"startIndex": 46, "endIndex": 58, "type": "Actor"}, {"startIndex": 151, "endIndex": 163, "type": "Actor"}, {"startIndex": 165, "endIndex": 177, "type": "Actor"}, {"startIndex": 193, "endIndex": 199, "type": "Action"}, {"startIndex": 202, "endIndex": 204, "type": "Victim"}]}
+{"_id": "t1_fmeeurf", "markers": [{"startIndex": 63, "endIndex": 74, "type": "Victim"}, {"startIndex": 79, "endIndex": 87, "type": "Action"}, {"startIndex": 208, "endIndex": 215, "type": "Actor"}, {"startIndex": 216, "endIndex": 226, "type": "Action"}]}
+{"_id": "t1_grzklo5", "markers": [{"startIndex": 60, "endIndex": 68, "type": "Victim"}, {"startIndex": 156, "endIndex": 167, "type": "Victim"}, {"startIndex": 267, "endIndex": 277, "type": "Actor"}]}
+{"_id": "t1_i822ve9", "markers": [{"startIndex": 248, "endIndex": 254, "type": "Actor"}]}
+{"_id": "t1_iz8j4o0", "markers": [{"startIndex": 77, "endIndex": 83, "type": "Actor"}, {"startIndex": 134, "endIndex": 140, "type": "Victim"}, {"startIndex": 300, "endIndex": 310, "type": "Actor"}]}
+{"_id": "t1_j61vfbq", "markers": []}
+{"_id": "t1_h9d81kh", "markers": [{"startIndex": 60, "endIndex": 71, "type": "Effect"}, {"startIndex": 192, "endIndex": 220, "type": "Actor"}]}
+{"_id": "t1_iqw0u8h", "markers": []}
+{"_id": "t1_gzsdjqd", "markers": [{"startIndex": 306, "endIndex": 311, "type": "Actor"}]}
+{"_id": "t1_jtpl6i0", "markers": []}
+{"_id": "t1_ge8cdxy", "markers": [{"startIndex": 48, "endIndex": 58, "type": "Actor"}, {"startIndex": 101, "endIndex": 108, "type": "Actor"}, {"startIndex": 173, "endIndex": 178, "type": "Victim"}]}
+{"_id": "t1_i39s5cr", "markers": [{"startIndex": 147, "endIndex": 153, "type": "Actor"}, {"startIndex": 195, "endIndex": 205, "type": "Victim"}, {"startIndex": 601, "endIndex": 607, "type": "Actor"}]}
+{"_id": "t1_f8uwbiu", "markers": [{"startIndex": 0, "endIndex": 4, "type": "Actor"}, {"startIndex": 18, "endIndex": 23, "type": "Actor"}, {"startIndex": 63, "endIndex": 67, "type": "Actor"}]}
+{"_id": "t1_gbppl9q", "markers": [{"startIndex": 0, "endIndex": 8, "type": "Actor"}]}
+{"_id": "t1_dkbw6hm", "markers": []}
+{"_id": "t1_etzu8la", "markers": [{"startIndex": 0, "endIndex": 15, "type": "Actor"}, {"startIndex": 27, "endIndex": 35, "type": "Victim"}, {"startIndex": 39, "endIndex": 46, "type": "Victim"}, {"startIndex": 52, "endIndex": 72, "type": "Action"}, {"startIndex": 132, "endIndex": 149, "type": "Actor"}]}
+{"_id": "t1_g3dvvsy", "markers": []}
+{"_id": "t1_gv2c0pn", "markers": []}
+{"_id": "t1_jbfcl3l", "markers": [{"startIndex": 4, "endIndex": 24, "type": "Actor"}, {"startIndex": 264, "endIndex": 272, "type": "Victim"}]}
+{"_id": "t1_jtokukp", "markers": [{"startIndex": 0, "endIndex": 5, "type": "Actor"}]}
+{"_id": "t1_ebb1ul4", "markers": [{"startIndex": 33, "endIndex": 43, "type": "Action"}]}
+{"_id": "t1_kfocsx3", "markers": [{"startIndex": 135, "endIndex": 147, "type": "Actor"}]}
+{"_id": "t1_igthcpf", "markers": [{"startIndex": 0, "endIndex": 15, "type": "Actor"}, {"startIndex": 26, "endIndex": 34, "type": "Action"}, {"startIndex": 42, "endIndex": 82, "type": "Action"}, {"startIndex": 130, "endIndex": 138, "type": "Actor"}, {"startIndex": 144, "endIndex": 154, "type": "Actor"}]}
+{"_id": "t1_h2vflri", "markers": [{"startIndex": 24, "endIndex": 38, "type": "Actor"}, {"startIndex": 144, "endIndex": 160, "type": "Actor"}]}
+{"_id": "t1_gy9x5qb", "markers": []}
+{"_id": "t1_gzq4gmj", "markers": [{"startIndex": 43, "endIndex": 68, "type": "Actor"}]}
+{"_id": "t1_gxp2r6y", "markers": [{"startIndex": 29, "endIndex": 34, "type": "Actor"}, {"startIndex": 86, "endIndex": 114, "type": "Actor"}]}
+{"_id": "t1_g8fj0b3", "markers": [{"startIndex": 65, "endIndex": 89, "type": "Actor"}, {"startIndex": 90, "endIndex": 106, "type": "Action"}, {"startIndex": 149, "endIndex": 155, "type": "Victim"}]}
+{"_id": "t1_juiilic", "markers": [{"startIndex": 0, "endIndex": 5, "type": "Evidence"}]}
+{"_id": "t1_i4sku3k", "markers": [{"startIndex": 88, "endIndex": 95, "type": "Evidence"}, {"startIndex": 135, "endIndex": 141, "type": "Victim"}]}
+{"_id": "t1_hhvqa53", "markers": []}
+{"_id": "t1_e2y185a", "markers": [{"startIndex": 0, "endIndex": 26, "type": "Actor"}, {"startIndex": 106, "endIndex": 132, "type": "Actor"}, {"startIndex": 220, "endIndex": 246, "type": "Actor"}, {"startIndex": 338, "endIndex": 347, "type": "Actor"}, {"startIndex": 358, "endIndex": 362, "type": "Actor"}, {"startIndex": 571, "endIndex": 585, "type": "Actor"}, {"startIndex": 618, "endIndex": 621, "type": "Actor"}]}
+{"_id": "t1_hwb2q87", "markers": []}
+{"_id": "t1_keldomq", "markers": []}
+{"_id": "t1_ebbwipj", "markers": []}
+{"_id": "t1_hf9nyyx", "markers": []}
+{"_id": "t1_i1stb90", "markers": [{"startIndex": 0, "endIndex": 6, "type": "Actor"}, {"startIndex": 65, "endIndex": 72, "type": "Victim"}, {"startIndex": 151, "endIndex": 172, "type": "Actor"}, {"startIndex": 179, "endIndex": 186, "type": "Evidence"}]}
+{"_id": "t1_intu4l7", "markers": [{"startIndex": 41, "endIndex": 76, "type": "Actor"}]}
+{"_id": "t1_g8m0g5e", "markers": [{"startIndex": 30, "endIndex": 38, "type": "Actor"}]}
+{"_id": "t1_dsccj9s", "markers": [{"startIndex": 223, "endIndex": 233, "type": "Action"}]}
+{"_id": "t1_gsiidh4", "markers": [{"startIndex": 15, "endIndex": 20, "type": "Actor"}, {"startIndex": 80, "endIndex": 86, "type": "Victim"}, {"startIndex": 258, "endIndex": 265, "type": "Victim"}, {"startIndex": 289, "endIndex": 294, "type": "Actor"}, {"startIndex": 423, "endIndex": 428, "type": "Victim"}, {"startIndex": 772, "endIndex": 787, "type": "Victim"}]}
+{"_id": "t1_g8c7j87", "markers": [{"startIndex": 14, "endIndex": 25, "type": "Actor"}, {"startIndex": 100, "endIndex": 123, "type": "Actor"}]}
+{"_id": "t1_g6dsjdr", "markers": []}
+{"_id": "t1_ik4hyr2", "markers": [{"startIndex": 45, "endIndex": 62, "type": "Actor"}]}
+{"_id": "t1_hel0lah", "markers": [{"startIndex": 9, "endIndex": 26, "type": "Actor"}]}
+{"_id": "t1_gx1236f", "markers": [{"startIndex": 120, "endIndex": 126, "type": "Actor"}]}
+{"_id": "t1_idsvamc", "markers": [{"startIndex": 88, "endIndex": 119, "type": "Actor"}, {"startIndex": 131, "endIndex": 165, "type": "Actor"}]}
+{"_id": "t1_gju9bqd", "markers": []}
+{"_id": "t1_h1m3v1r", "markers": [{"startIndex": 4, "endIndex": 6, "type": "Actor"}, {"startIndex": 7, "endIndex": 13, "type": "Action"}, {"startIndex": 30, "endIndex": 35, "type": "Actor"}, {"startIndex": 66, "endIndex": 82, "type": "Action"}]}
+{"_id": "t1_ffdm2qm", "markers": [{"startIndex": 326, "endIndex": 353, "type": "Actor"}, {"startIndex": 384, "endIndex": 388, "type": "Effect"}, {"startIndex": 391, "endIndex": 398, "type": "Victim"}]}
+{"_id": "t1_ic8l1ys", "markers": [{"startIndex": 229, "endIndex": 235, "type": "Actor"}]}
+{"_id": "t1_g9fmaqp", "markers": [{"startIndex": 0, "endIndex": 6, "type": "Actor"}]}
+{"_id": "t1_k0tb7s8", "markers": []}
+{"_id": "t1_grux7i5", "markers": [{"startIndex": 72, "endIndex": 79, "type": "Actor"}]}
+{"_id": "t1_dv50ne3", "markers": [{"startIndex": 28, "endIndex": 35, "type": "Actor"}, {"startIndex": 76, "endIndex": 101, "type": "Action"}, {"startIndex": 238, "endIndex": 243, "type": "Effect"}, {"startIndex": 319, "endIndex": 327, "type": "Victim"}]}
+{"_id": "t1_gwwzzkr", "markers": [{"startIndex": 164, "endIndex": 172, "type": "Actor"}]}
