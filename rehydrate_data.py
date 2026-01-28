@@ -119,6 +119,8 @@ def rehydrate_comments(input_file, output_file):
 
 if __name__ == "__main__":
 
-    for input_file, output_file in [("train_redacted.jsonl", "train_rehydrated.jsonl"),
-                                    ("dev_redacted.jsonl", "dev_rehydrated.jsonl")]:
+    for input_file, output_file in [("test_redacted.jsonl", "test_rehydrated.jsonl")]:
         rehydrate_comments(input_file, output_file)
+    #for input_file, output_file in [("train_redacted.jsonl", "train_rehydrated.jsonl"),
+    #                                ("dev_redacted.jsonl", "dev_rehydrated.jsonl")]:
+    #    rehydrate_comments(input_file, output_file)

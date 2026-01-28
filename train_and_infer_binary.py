@@ -2,6 +2,12 @@
 """
 Binary Conspiracy Detection with RoBERTa-Large + LoRA
 Target: Beat baseline F1 weighted score of ~0.76 on dev set
+
+Pipeline:
+  - Train:  train_rehydrated.jsonl, 90% stratified split (data_splits/binary_train_ids.txt)
+  - Val:    train_rehydrated.jsonl, 10% stratified split (data_splits/binary_val_ids.txt)
+  - Test:   full dev — text dev_rehydrated.jsonl, labels dev_public.jsonl (Yes/No only)
+  - Final:  inference on test_rehydrated.jsonl → submission_output/submission.jsonl + .zip
 """
 
 import os
@@ -13,7 +19,13 @@ import pandas as pd
 import torch
 from pathlib import Path
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import classification_report, confusion_matrix, f1_score, accuracy_score
+from sklearn.metrics import (
+    classification_report,
+    confusion_matrix,
+    f1_score,
+    accuracy_score,
+    precision_recall_fscore_support,
+)
 
 from transformers import (
     RobertaTokenizerFast,
@@ -76,6 +88,32 @@ def load_dev_data(file_path):
     return data
 
 
+def load_test_from_dev(dev_public_path, dev_rehydrated_path):
+    """
+    Build test set from dev: labels dev_public.jsonl, text dev_rehydrated.jsonl.
+    Returns list of {_id, text, conspiracy} for Yes/No only; same shape as load_and_filter_data.
+    """
+    with open(dev_rehydrated_path, 'r') as f:
+        id_to_text = {json.loads(line)["_id"]: json.loads(line).get("text", "") for line in f}
+    data = []
+    with open(dev_public_path, 'r') as f:
+        for line in f:
+            try:
+                item = json.loads(line)
+                _id = item.get("_id")
+                label = item.get("conspiracy", "")
+                if _id is None or label not in ("Yes", "No"):
+                    continue
+                data.append({
+                    "_id": _id,
+                    "text": id_to_text.get(_id, ""),
+                    "conspiracy": label,
+                })
+            except json.JSONDecodeError:
+                pass
+    return data
+
+
 def compute_metrics(eval_pred):
     predictions, labels = eval_pred
     predictions = np.argmax(predictions, axis=-1)
@@ -91,6 +129,71 @@ def compute_metrics(eval_pred):
     }
 
 
+def load_dev_public_gold(file_path):
+    """Load dev_public.jsonl ground truth: _id -> conspiracy (Yes/No/Can't tell)."""
+    gold = {}
+    with open(file_path, 'r') as f:
+        for i, line in enumerate(f):
+            try:
+                item = json.loads(line)
+                _id = item.get('_id')
+                if _id is not None:
+                    gold[_id] = item.get('conspiracy', '')
+            except json.JSONDecodeError:
+                pass
+    return gold
+
+
+def evaluate_vs_dev_public(unique_ids, predicted_labels, gold_path, output_dir):
+    """
+    Compare submission predictions to dev_public ground truth.
+    Filter to Yes/No only for metrics; report excluded Can't tell.
+    """
+    gold = load_dev_public_gold(gold_path)
+    y_true, y_pred = [], []
+    n_cant_tell = 0
+    for i, _id in enumerate(unique_ids):
+        g = gold.get(_id)
+        if g is None:
+            continue
+        if g not in ("Yes", "No"):
+            n_cant_tell += 1
+            continue
+        y_true.append(g)
+        y_pred.append(predicted_labels[i])
+    if n_cant_tell:
+        print(f"  (Excluded {n_cant_tell} dev_public samples with 'Can't tell' from metrics)")
+    if not y_true:
+        print("  No Yes/No ground-truth samples to evaluate.")
+        return
+    acc = accuracy_score(y_true, y_pred)
+    f1w = f1_score(y_true, y_pred, labels=["No", "Yes"], average="weighted", zero_division=0)
+    f1m = f1_score(y_true, y_pred, labels=["No", "Yes"], average="macro", zero_division=0)
+    prec, rec, f1_per, _ = precision_recall_fscore_support(
+        y_true, y_pred, labels=["No", "Yes"], average=None, zero_division=0
+    )
+    print(f"\n  Matched {len(y_true)} samples (Yes/No only).")
+    print(f"  Accuracy: {acc:.4f}  F1 (weighted): {f1w:.4f}  F1 (macro): {f1m:.4f}")
+    print("\n  Classification report vs dev_public (ground truth):")
+    print(classification_report(y_true, y_pred, labels=["No", "Yes"]))
+    cm = confusion_matrix(y_true, y_pred, labels=["No", "Yes"])
+    print("  Confusion matrix (rows=true, cols=pred):")
+    print(f"    {cm}")
+    scores = {
+        "accuracy": float(acc),
+        "f1_weighted": float(f1w),
+        "f1_macro": float(f1m),
+        "f1_No": float(f1_per[0]),
+        "f1_Yes": float(f1_per[1]),
+        "n_eval": len(y_true),
+        "n_cant_tell_excluded": n_cant_tell,
+    }
+    out_path = Path(output_dir) / "scores.json"
+    with open(out_path, "w") as f:
+        json.dump(scores, f, indent=2)
+    print(f"\n  Saved metrics to {out_path}")
+
+
 def main():
     print("="*60)
     print("Binary Conspiracy Detection - RoBERTa-Large + LoRA")
@@ -103,7 +206,7 @@ def main():
     BATCH_SIZE = 16
     GRADIENT_ACCUMULATION_STEPS = 2
     LEARNING_RATE = 5e-5
-    NUM_EPOCHS = 10
+    NUM_EPOCHS = 20
     WEIGHT_DECAY = 0 #0.01
     WARMUP_RATIO = 0 #0.1
     DROPOUT_RATE = 0 #0.1
@@ -140,47 +243,47 @@ def main():
     print(f"\nClass distribution:")
     print(df['conspiracy'].value_counts())
     
-    # Create or load splits
+    # Train/val: 90/10 split from train_rehydrated. Test: full dev (dev_rehydrated + dev_public).
     train_ids_file = SPLITS_DIR / "binary_train_ids.txt"
     val_ids_file = SPLITS_DIR / "binary_val_ids.txt"
-    test_ids_file = SPLITS_DIR / "binary_test_ids.txt"
-    
-    if train_ids_file.exists() and val_ids_file.exists() and test_ids_file.exists():
-        print(f"\n✓ Loading existing splits from {SPLITS_DIR}...")
-        
+    dev_public_path = BASE / "dev_public.jsonl"
+    dev_rehydrated_path = BASE / "dev_rehydrated.jsonl"
+
+    if train_ids_file.exists() and val_ids_file.exists():
+        print(f"\n✓ Loading existing 90/10 train/val splits from {SPLITS_DIR}...")
         with open(train_ids_file, 'r') as f:
             train_ids = set(line.strip() for line in f)
         with open(val_ids_file, 'r') as f:
             val_ids = set(line.strip() for line in f)
-        with open(test_ids_file, 'r') as f:
-            test_ids = set(line.strip() for line in f)
-        
         train_df = df[df['_id'].isin(train_ids)].copy()
         val_df = df[df['_id'].isin(val_ids)].copy()
-        test_df = df[df['_id'].isin(test_ids)].copy()
     else:
-        print(f"\n✓ Creating new splits...")
-        
-        temp_train, test_df = train_test_split(
+        print(f"\n✓ Creating 90/10 train/val splits...")
+        train_df, val_df = train_test_split(
             df, test_size=0.1, stratify=df['conspiracy'], random_state=42
         )
-        
-        train_df, val_df = train_test_split(
-            temp_train, test_size=0.1, stratify=temp_train['conspiracy'], random_state=42
-        )
-        
         with open(train_ids_file, 'w') as f:
             f.write('\n'.join(train_df['_id'].values))
         with open(val_ids_file, 'w') as f:
             f.write('\n'.join(val_df['_id'].values))
-        with open(test_ids_file, 'w') as f:
-            f.write('\n'.join(test_df['_id'].values))
-        
         print(f"  ✓ Saved split IDs to {SPLITS_DIR}")
-    
-    print(f"  Train: {len(train_df)} samples")
-    print(f"  Val: {len(val_df)} samples")
-    print(f"  Test: {len(test_df)} samples")
+
+    test_data = load_test_from_dev(dev_public_path, dev_rehydrated_path)
+    test_df = pd.DataFrame(test_data)
+    if len(test_df) == 0:
+        raise FileNotFoundError(
+            f"Test set is empty. Ensure {dev_public_path.name} and {dev_rehydrated_path.name} exist "
+            "and contain Yes/No labels."
+        )
+
+    print(f"  Train: {len(train_df)} samples (90% from {train_file.name})")
+    print(f"  Val:   {len(val_df)} samples (10% from {train_file.name})")
+    print(f"  Test:  {len(test_df)} samples (full dev: {dev_rehydrated_path.name} + {dev_public_path.name})")
+
+    print(f"\n  Pipeline verification:")
+    print(f"    Train / Val: 90/10 split from train_rehydrated.jsonl")
+    print(f"    Test:        full dev — text {dev_rehydrated_path.name}, labels {dev_public_path.name}")
+    print(f"    Final:       test_rehydrated.jsonl → submission_output/")
     
     # Prepare data
     print(f"\n{'='*60}")
@@ -349,29 +452,32 @@ def main():
     print("\nClassification Report:")
     print(classification_report(y_true_labels, y_pred_labels))
     
-    # Generate submission
+    # Generate submission: run inference on test_rehydrated.jsonl → submission_output/
     print(f"\n{'='*60}")
     print("Generating Submission")
     print(f"{'='*60}")
     
-    DEV_FILE = BASE / "dev_rehydrated.jsonl"
-    SUBMISSION_FILE = "submission.jsonl"
-    SUBMISSION_ZIP = "submission.zip"
+    SUBMISSION_INPUT_FILE = BASE / "test_rehydrated.jsonl"
+    DEV_PUBLIC_GT = BASE / "dev_public.jsonl"
+    SUBMISSION_OUTPUT_DIR = BASE / "submission_output"
+    SUBMISSION_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+    SUBMISSION_FILE = SUBMISSION_OUTPUT_DIR / "submission.jsonl"
+    SUBMISSION_ZIP = SUBMISSION_OUTPUT_DIR / "submission.zip"
     
-    dev_data = load_dev_data(DEV_FILE)
-    dev_dataset = Dataset.from_list(dev_data)
-    unique_ids = dev_dataset["unique_sample_id"]
+    submission_data = load_dev_data(SUBMISSION_INPUT_FILE)
+    submission_dataset = Dataset.from_list(submission_data)
+    unique_ids = submission_dataset["unique_sample_id"]
     
-    print(f"✓ Loaded {len(dev_dataset)} samples from dev set")
+    print(f"✓ Loaded {len(submission_dataset)} samples from {SUBMISSION_INPUT_FILE.name}")
     
-    dev_dataset_tokenized = dev_dataset.map(
+    submission_dataset_tokenized = submission_dataset.map(
         lambda examples: tokenizer(examples["text"], truncation=True, max_length=MAX_LENGTH),
         batched=True
     )
-    dev_dataset_tokenized = dev_dataset_tokenized.remove_columns(["unique_sample_id", "text"])
+    submission_dataset_tokenized = submission_dataset_tokenized.remove_columns(["unique_sample_id", "text"])
     
     print("Generating predictions...")
-    predictions_output = trainer.predict(dev_dataset_tokenized)
+    predictions_output = trainer.predict(submission_dataset_tokenized)
     logits = predictions_output.predictions
     predicted_class_ids = np.argmax(logits, axis=-1)
     predicted_labels = [id_to_label[int(id)] for id in predicted_class_ids]
@@ -380,7 +486,7 @@ def main():
     print(f"\nPrediction distribution:")
     print(pd.Series(predicted_labels).value_counts())
     
-    # Save submission
+    # Save submission to output directory
     print(f"\nSaving to {SUBMISSION_FILE}...")
     with open(SUBMISSION_FILE, 'w') as f:
         for i, label in enumerate(predicted_labels):
@@ -398,9 +504,21 @@ def main():
     
     print(f"✓ Created submission zip")
     
+    # Compare vs dev_public ground truth
+    print(f"\n{'='*60}")
+    print("Evaluation vs dev_public.jsonl (ground truth)")
+    print(f"{'='*60}")
+    if DEV_PUBLIC_GT.exists():
+        evaluate_vs_dev_public(
+            list(unique_ids), predicted_labels, DEV_PUBLIC_GT, SUBMISSION_OUTPUT_DIR
+        )
+    else:
+        print(f"  Ground truth not found: {DEV_PUBLIC_GT}")
+    
     print(f"\n{'='*60}")
     print("SUBMISSION READY!")
     print(f"{'='*60}")
+    print(f"✓ Output dir: {SUBMISSION_OUTPUT_DIR}")
     print(f"✓ File: {SUBMISSION_ZIP}")
     print(f"✓ Predictions: {len(predicted_labels)}")
     print(f"\nNext steps:")
