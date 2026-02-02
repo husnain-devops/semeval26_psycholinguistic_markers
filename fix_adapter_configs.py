@@ -8,29 +8,42 @@ import glob
 from pathlib import Path
 
 def clean_adapter_config(config_path):
-    """Remove incompatible fields from adapter_config.json"""
+    """Keep only essential LoRA fields, remove all others"""
     with open(config_path, 'r') as f:
         config = json.load(f)
     
-    # Fields to remove (incompatible with older PEFT versions)
-    fields_to_remove = [
-        'alora_invocation_tokens',
-        'corda_config',
-        'eva_config',
-        'arrow_config',
-        'qalora_group_size'
-    ]
+    # Keep only these essential fields
+    essential_fields = {
+        'peft_type',
+        'base_model_name_or_path',
+        'r',
+        'lora_alpha',
+        'lora_dropout',
+        'target_modules',
+        'bias',
+        'fan_in_fan_out',
+        'init_lora_weights',
+        'layers_to_transform',
+        'layers_pattern',
+        'modules_to_save',
+        'inference_mode',
+        'task_type'
+    }
     
-    modified = False
-    for field in fields_to_remove:
-        if field in config:
-            del config[field]
-            modified = True
-            print(f"  Removed: {field}")
+    # Create new config with only essential fields
+    new_config = {}
+    removed_fields = []
     
-    if modified:
+    for key, value in config.items():
+        if key in essential_fields:
+            new_config[key] = value
+        else:
+            removed_fields.append(key)
+    
+    if removed_fields:
         with open(config_path, 'w') as f:
-            json.dump(config, f, indent=2)
+            json.dump(new_config, f, indent=2)
+        print(f"  Removed {len(removed_fields)} incompatible fields")
         return True
     return False
 
