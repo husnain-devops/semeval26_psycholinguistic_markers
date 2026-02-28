@@ -132,10 +132,12 @@ def main():
         append_log(f"[preprocessing] parquet write failed: {e}. Wrote CSV to {csv_out}")
 
     # token_pos_counts
-    tpc = df[['__id','_id']] if '_id' in df.columns else None
     cols_out = ['_id','n_tokens','n_sentences','n_nouns','n_verbs','n_adjs','n_advs','n_pronouns']
-    df[cols_out].to_csv(FEAT / 'token_pos_counts.csv', index=False)
-    append_log(f"[preprocessing] saved token_pos_counts.csv")
+    if '_id' in df.columns:
+        df[cols_out].to_csv(FEAT / 'token_pos_counts.csv', index=False)
+        append_log(f"[preprocessing] saved token_pos_counts.csv")
+    else:
+        append_log(f"[preprocessing] '_id' column not found, skipping token_pos_counts.csv")
     append_log("[preprocessing] END")
 
 if __name__ == '__main__':

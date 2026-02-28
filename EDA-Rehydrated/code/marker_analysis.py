@@ -41,6 +41,13 @@ def main():
         append_log("[marker_analysis] data_clean.csv not found")
         return
     df = pd.read_csv(dfp)
+    
+    # Check if markers column exists - if not, skip analysis
+    if 'markers' not in df.columns:
+        append_log("[marker_analysis] markers column not found in data. Skipping marker analysis.")
+        append_log("[marker_analysis] END")
+        return
+    
     types = ['Actor','Action','Victim','Evidence','Effect']
     rows = []
     co = defaultdict(int)

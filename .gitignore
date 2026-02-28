@@ -180,3 +180,8 @@ EDA-Rehydrated/models/
 EDA-Rehydrated/embeddings/
 EDA-Rehydrated/figures/
 EDA-Rehydrated/data_processed/
+EDA-Rehydrated/features/
+EDA-Rehydrated/notebooks/bert-base-conspiracy-classification/
+# Large model/optimizer files (GitHub limit 100 MB)
+**/checkpoint-*/model.safetensors
+**/checkpoint-*/optimizer.pt
