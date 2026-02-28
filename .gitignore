@@ -178,10 +178,25 @@ EDA-Rehydrated.zip
 
 EDA-Rehydrated/models/
 EDA-Rehydrated/embeddings/
-EDA-Rehydrated/figures/
-EDA-Rehydrated/data_processed/
-EDA-Rehydrated/features/
+
 EDA-Rehydrated/notebooks/bert-base-conspiracy-classification/
 # Large model/optimizer files (GitHub limit 100 MB)
 **/checkpoint-*/model.safetensors
 **/checkpoint-*/optimizer.pt
+
+tmp_inference*
+tmp*
+distilbert*
+roberta*
+models_for_sharing*
+hf_models*
+hf_models1*
+EDA-Rehydrated/notebooks/roberta-base-markers-lora/
+EDA-Rehydrated/notebooks/roberta-large-markers-lora/
+EDA-Rehydrated/notebooks/roberta-large-single-type-simplified-Actor/
+EDA-Rehydrated/notebooks/roberta-large-single-type-simplified-Action/
+EDA-Rehydrated/notebooks/roberta-large-single-type-simplified-Effect/
+EDA-Rehydrated/notebooks/roberta-large-single-type-simplified-Evidence/
+EDA-Rehydrated/notebooks/roberta-large-single-type-simplified-Victim/
+EDA-Rehydrated/notebooks/roberta-large-markers-lora/
+EDA-Rehydrated/notebooks/roberta-large-markers-lora/

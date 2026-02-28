@@ -1,0 +1,660 @@
+============================================================
+2026-02-24 20:36:51,434 INFO: ============================================================
+RUN (no_cant_tell) START 2026-02-24 20:36:51
+2026-02-24 20:36:51,434 INFO: RUN (no_cant_tell) START 2026-02-24 20:36:51
+SEED=42
+2026-02-24 20:36:51,434 INFO: SEED=42
+EDA directory: /home/husnain/semeval26_psycholinguistic_markers/EDA-Rehydrated
+2026-02-24 20:36:51,434 INFO: EDA directory: /home/husnain/semeval26_psycholinguistic_markers/EDA-Rehydrated
+Binary ingest dir: /home/husnain/semeval26_psycholinguistic_markers/EDA-Rehydrated/code_no_cant_tell
+2026-02-24 20:36:51,435 INFO: Binary ingest dir: /home/husnain/semeval26_psycholinguistic_markers/EDA-Rehydrated/code_no_cant_tell
+Standard code dir: /home/husnain/semeval26_psycholinguistic_markers/EDA-Rehydrated/code
+2026-02-24 20:36:51,435 INFO: Standard code dir: /home/husnain/semeval26_psycholinguistic_markers/EDA-Rehydrated/code
+============================================================
+2026-02-24 20:36:51,435 INFO: ============================================================
+Found 14 step(s) to run:
+2026-02-24 20:36:51,435 INFO: Found 14 step(s) to run:
+  - code_no_cant_tell/data_ingest.py
+2026-02-24 20:36:51,435 INFO:   - code_no_cant_tell/data_ingest.py
+  - code/preprocessing.py
+2026-02-24 20:36:51,435 INFO:   - code/preprocessing.py
+  - code/pos_analysis.py
+2026-02-24 20:36:51,435 INFO:   - code/pos_analysis.py
+  - code/lexical_complexity.py
+2026-02-24 20:36:51,435 INFO:   - code/lexical_complexity.py
+  - code/ma_ttr_mtld_analysis.py
+2026-02-24 20:36:51,435 INFO:   - code/ma_ttr_mtld_analysis.py
+  - code/readability_entropy.py
+2026-02-24 20:36:51,435 INFO:   - code/readability_entropy.py
+  - code/plot_readability.py
+2026-02-24 20:36:51,435 INFO:   - code/plot_readability.py
+  - code/sentiment_emotion.py
+2026-02-24 20:36:51,435 INFO:   - code/sentiment_emotion.py
+  - code/discourse_markers_and_hedges.py
+2026-02-24 20:36:51,435 INFO:   - code/discourse_markers_and_hedges.py
+  - code/marker_analysis.py
+2026-02-24 20:36:51,435 INFO:   - code/marker_analysis.py
+  - code/topic_modeling.py
+2026-02-24 20:36:51,436 INFO:   - code/topic_modeling.py
+  - code/embeddings_and_clustering.py
+2026-02-24 20:36:51,436 INFO:   - code/embeddings_and_clustering.py
+  - code/statistical_tests_and_feature_importance.py
+2026-02-24 20:36:51,436 INFO:   - code/statistical_tests_and_feature_importance.py
+  - code/reporting.py
+2026-02-24 20:36:51,436 INFO:   - code/reporting.py
+
+2026-02-24 20:36:51,436 INFO: 
+============================================================
+2026-02-24 20:36:51,436 INFO: ============================================================
+START data_ingest.py (code_no_cant_tell) at 2026-02-24 20:36:51
+2026-02-24 20:36:51,436 INFO: START data_ingest.py (code_no_cant_tell) at 2026-02-24 20:36:51
+============================================================
+2026-02-24 20:36:51,436 INFO: ============================================================
+✓ data_ingest.py completed successfully
+2026-02-24 20:36:51,791 INFO: ✓ data_ingest.py completed successfully
+END data_ingest.py at 2026-02-24 20:36:51
+2026-02-24 20:36:51,791 INFO: END data_ingest.py at 2026-02-24 20:36:51
+
+2026-02-24 20:36:51,792 INFO: 
+============================================================
+2026-02-24 20:36:51,792 INFO: ============================================================
+START preprocessing.py (code) at 2026-02-24 20:36:51
+2026-02-24 20:36:51,792 INFO: START preprocessing.py (code) at 2026-02-24 20:36:51
+============================================================
+2026-02-24 20:36:51,792 INFO: ============================================================
+✓ preprocessing.py completed successfully
+2026-02-24 20:38:15,805 INFO: ✓ preprocessing.py completed successfully
+END preprocessing.py at 2026-02-24 20:38:15
+2026-02-24 20:38:15,805 INFO: END preprocessing.py at 2026-02-24 20:38:15
+
+2026-02-24 20:38:15,805 INFO: 
+============================================================
+2026-02-24 20:38:15,806 INFO: ============================================================
+START pos_analysis.py (code) at 2026-02-24 20:38:15
+2026-02-24 20:38:15,806 INFO: START pos_analysis.py (code) at 2026-02-24 20:38:15
+============================================================
+2026-02-24 20:38:15,806 INFO: ============================================================
+✓ pos_analysis.py completed successfully
+2026-02-24 20:39:07,324 INFO: ✓ pos_analysis.py completed successfully
+END pos_analysis.py at 2026-02-24 20:39:07
+2026-02-24 20:39:07,325 INFO: END pos_analysis.py at 2026-02-24 20:39:07
+
+2026-02-24 20:39:07,325 INFO: 
+============================================================
+2026-02-24 20:39:07,325 INFO: ============================================================
+START lexical_complexity.py (code) at 2026-02-24 20:39:07
+2026-02-24 20:39:07,325 INFO: START lexical_complexity.py (code) at 2026-02-24 20:39:07
+============================================================
+2026-02-24 20:39:07,325 INFO: ============================================================
+✓ lexical_complexity.py completed successfully
+2026-02-24 20:39:09,340 INFO: ✓ lexical_complexity.py completed successfully
+END lexical_complexity.py at 2026-02-24 20:39:09
+2026-02-24 20:39:09,340 INFO: END lexical_complexity.py at 2026-02-24 20:39:09
+
+2026-02-24 20:39:09,340 INFO: 
+============================================================
+2026-02-24 20:39:09,340 INFO: ============================================================
+START ma_ttr_mtld_analysis.py (code) at 2026-02-24 20:39:09
+2026-02-24 20:39:09,340 INFO: START ma_ttr_mtld_analysis.py (code) at 2026-02-24 20:39:09
+============================================================
+2026-02-24 20:39:09,340 INFO: ============================================================
+✓ ma_ttr_mtld_analysis.py completed successfully
+2026-02-24 20:39:12,573 INFO: ✓ ma_ttr_mtld_analysis.py completed successfully
+END ma_ttr_mtld_analysis.py at 2026-02-24 20:39:12
+2026-02-24 20:39:12,574 INFO: END ma_ttr_mtld_analysis.py at 2026-02-24 20:39:12
+
+2026-02-24 20:39:12,574 INFO: 
+============================================================
+2026-02-24 20:39:12,574 INFO: ============================================================
+START readability_entropy.py (code) at 2026-02-24 20:39:12
+2026-02-24 20:39:12,574 INFO: START readability_entropy.py (code) at 2026-02-24 20:39:12
+============================================================
+2026-02-24 20:39:12,574 INFO: ============================================================
+✓ readability_entropy.py completed successfully
+2026-02-24 20:39:20,128 INFO: ✓ readability_entropy.py completed successfully
+END readability_entropy.py at 2026-02-24 20:39:20
+2026-02-24 20:39:20,128 INFO: END readability_entropy.py at 2026-02-24 20:39:20
+
+2026-02-24 20:39:20,128 INFO: 
+============================================================
+2026-02-24 20:39:20,128 INFO: ============================================================
+START plot_readability.py (code) at 2026-02-24 20:39:20
+2026-02-24 20:39:20,128 INFO: START plot_readability.py (code) at 2026-02-24 20:39:20
+============================================================
+2026-02-24 20:39:20,128 INFO: ============================================================
+✓ plot_readability.py completed successfully
+2026-02-24 20:39:24,988 INFO: ✓ plot_readability.py completed successfully
+END plot_readability.py at 2026-02-24 20:39:24
+2026-02-24 20:39:24,988 INFO: END plot_readability.py at 2026-02-24 20:39:24
+
+2026-02-24 20:39:24,989 INFO: 
+============================================================
+2026-02-24 20:39:24,989 INFO: ============================================================
+START sentiment_emotion.py (code) at 2026-02-24 20:39:24
+2026-02-24 20:39:24,989 INFO: START sentiment_emotion.py (code) at 2026-02-24 20:39:24
+============================================================
+2026-02-24 20:39:24,989 INFO: ============================================================
+✓ sentiment_emotion.py completed successfully
+2026-02-24 20:39:27,024 INFO: ✓ sentiment_emotion.py completed successfully
+END sentiment_emotion.py at 2026-02-24 20:39:27
+2026-02-24 20:39:27,024 INFO: END sentiment_emotion.py at 2026-02-24 20:39:27
+
+2026-02-24 20:39:27,024 INFO: 
+============================================================
+2026-02-24 20:39:27,024 INFO: ============================================================
+START discourse_markers_and_hedges.py (code) at 2026-02-24 20:39:27
+2026-02-24 20:39:27,024 INFO: START discourse_markers_and_hedges.py (code) at 2026-02-24 20:39:27
+============================================================
+2026-02-24 20:39:27,024 INFO: ============================================================
+✓ discourse_markers_and_hedges.py completed successfully
+2026-02-24 20:39:27,652 INFO: ✓ discourse_markers_and_hedges.py completed successfully
+END discourse_markers_and_hedges.py at 2026-02-24 20:39:27
+2026-02-24 20:39:27,652 INFO: END discourse_markers_and_hedges.py at 2026-02-24 20:39:27
+
+2026-02-24 20:39:27,652 INFO: 
+============================================================
+2026-02-24 20:39:27,652 INFO: ============================================================
+START marker_analysis.py (code) at 2026-02-24 20:39:27
+2026-02-24 20:39:27,652 INFO: START marker_analysis.py (code) at 2026-02-24 20:39:27
+============================================================
+2026-02-24 20:39:27,652 INFO: ============================================================
+✓ marker_analysis.py completed successfully
+2026-02-24 20:39:28,044 INFO: ✓ marker_analysis.py completed successfully
+END marker_analysis.py at 2026-02-24 20:39:28
+2026-02-24 20:39:28,044 INFO: END marker_analysis.py at 2026-02-24 20:39:28
+
+2026-02-24 20:39:28,044 INFO: 
+============================================================
+2026-02-24 20:39:28,044 INFO: ============================================================
+START topic_modeling.py (code) at 2026-02-24 20:39:28
+2026-02-24 20:39:28,044 INFO: START topic_modeling.py (code) at 2026-02-24 20:39:28
+============================================================
+2026-02-24 20:39:28,044 INFO: ============================================================
+✗ topic_modeling.py failed with exit code 1
+2026-02-24 20:39:28,411 INFO: ✗ topic_modeling.py failed with exit code 1
+END topic_modeling.py at 2026-02-24 20:39:28
+2026-02-24 20:39:28,411 INFO: END topic_modeling.py at 2026-02-24 20:39:28
+
+2026-02-24 20:39:28,411 INFO: 
+============================================================
+2026-02-24 20:39:28,412 INFO: ============================================================
+START embeddings_and_clustering.py (code) at 2026-02-24 20:39:28
+2026-02-24 20:39:28,412 INFO: START embeddings_and_clustering.py (code) at 2026-02-24 20:39:28
+============================================================
+2026-02-24 20:39:28,412 INFO: ============================================================
+✓ embeddings_and_clustering.py completed successfully
+2026-02-24 20:40:23,485 INFO: ✓ embeddings_and_clustering.py completed successfully
+END embeddings_and_clustering.py at 2026-02-24 20:40:23
+2026-02-24 20:40:23,485 INFO: END embeddings_and_clustering.py at 2026-02-24 20:40:23
+
+2026-02-24 20:40:23,485 INFO: 
+============================================================
+2026-02-24 20:40:23,485 INFO: ============================================================
+START statistical_tests_and_feature_importance.py (code) at 2026-02-24 20:40:23
+2026-02-24 20:40:23,486 INFO: START statistical_tests_and_feature_importance.py (code) at 2026-02-24 20:40:23
+============================================================
+2026-02-24 20:40:23,486 INFO: ============================================================
+✓ statistical_tests_and_feature_importance.py completed successfully
+2026-02-24 20:42:19,594 INFO: ✓ statistical_tests_and_feature_importance.py completed successfully
+END statistical_tests_and_feature_importance.py at 2026-02-24 20:42:19
+2026-02-24 20:42:19,594 INFO: END statistical_tests_and_feature_importance.py at 2026-02-24 20:42:19
+
+2026-02-24 20:42:19,594 INFO: 
+============================================================
+2026-02-24 20:42:19,594 INFO: ============================================================
+START reporting.py (code) at 2026-02-24 20:42:19
+2026-02-24 20:42:19,595 INFO: START reporting.py (code) at 2026-02-24 20:42:19
+============================================================
+2026-02-24 20:42:19,595 INFO: ============================================================
+✓ reporting.py completed successfully
+2026-02-24 20:42:19,955 INFO: ✓ reporting.py completed successfully
+END reporting.py at 2026-02-24 20:42:19
+2026-02-24 20:42:19,955 INFO: END reporting.py at 2026-02-24 20:42:19
+
+2026-02-24 20:42:19,955 INFO: 
+============================================================
+2026-02-24 20:42:19,955 INFO: ============================================================
+RUN (no_cant_tell) SUMMARY
+2026-02-24 20:42:19,955 INFO: RUN (no_cant_tell) SUMMARY
+============================================================
+2026-02-24 20:42:19,955 INFO: ============================================================
+✓ code_no_cant_tell/data_ingest.py
+2026-02-24 20:42:19,955 INFO: ✓ code_no_cant_tell/data_ingest.py
+✓ code/preprocessing.py
+2026-02-24 20:42:19,955 INFO: ✓ code/preprocessing.py
+✓ code/pos_analysis.py
+2026-02-24 20:42:19,955 INFO: ✓ code/pos_analysis.py
+✓ code/lexical_complexity.py
+2026-02-24 20:42:19,955 INFO: ✓ code/lexical_complexity.py
+✓ code/ma_ttr_mtld_analysis.py
+2026-02-24 20:42:19,955 INFO: ✓ code/ma_ttr_mtld_analysis.py
+✓ code/readability_entropy.py
+2026-02-24 20:42:19,956 INFO: ✓ code/readability_entropy.py
+✓ code/plot_readability.py
+2026-02-24 20:42:19,956 INFO: ✓ code/plot_readability.py
+✓ code/sentiment_emotion.py
+2026-02-24 20:42:19,956 INFO: ✓ code/sentiment_emotion.py
+✓ code/discourse_markers_and_hedges.py
+2026-02-24 20:42:19,956 INFO: ✓ code/discourse_markers_and_hedges.py
+✓ code/marker_analysis.py
+2026-02-24 20:42:19,956 INFO: ✓ code/marker_analysis.py
+✗ code/topic_modeling.py
+2026-02-24 20:42:19,956 INFO: ✗ code/topic_modeling.py
+✓ code/embeddings_and_clustering.py
+2026-02-24 20:42:19,956 INFO: ✓ code/embeddings_and_clustering.py
+✓ code/statistical_tests_and_feature_importance.py
+2026-02-24 20:42:19,956 INFO: ✓ code/statistical_tests_and_feature_importance.py
+✓ code/reporting.py
+2026-02-24 20:42:19,956 INFO: ✓ code/reporting.py
+
+2026-02-24 20:42:19,956 INFO: 
+Total: 14 steps
+2026-02-24 20:42:19,956 INFO: Total: 14 steps
+Successful: 13
+2026-02-24 20:42:19,956 INFO: Successful: 13
+Failed: 1
+2026-02-24 20:42:19,956 INFO: Failed: 1
+============================================================
+2026-02-24 20:42:19,956 INFO: ============================================================
+RUN (no_cant_tell) END 2026-02-24 20:42:19
+2026-02-24 20:42:19,956 INFO: RUN (no_cant_tell) END 2026-02-24 20:42:19
+============================================================
+2026-02-24 20:42:19,956 INFO: ============================================================
+============================================================
+2026-02-24 20:42:20,005 INFO: ============================================================
+RUN (no_cant_tell) START 2026-02-24 20:42:20
+2026-02-24 20:42:20,005 INFO: RUN (no_cant_tell) START 2026-02-24 20:42:20
+SEED=42
+2026-02-24 20:42:20,005 INFO: SEED=42
+EDA directory: /home/husnain/semeval26_psycholinguistic_markers/EDA-Rehydrated
+2026-02-24 20:42:20,005 INFO: EDA directory: /home/husnain/semeval26_psycholinguistic_markers/EDA-Rehydrated
+Binary ingest dir: /home/husnain/semeval26_psycholinguistic_markers/EDA-Rehydrated/code_no_cant_tell
+2026-02-24 20:42:20,006 INFO: Binary ingest dir: /home/husnain/semeval26_psycholinguistic_markers/EDA-Rehydrated/code_no_cant_tell
+Standard code dir: /home/husnain/semeval26_psycholinguistic_markers/EDA-Rehydrated/code
+2026-02-24 20:42:20,006 INFO: Standard code dir: /home/husnain/semeval26_psycholinguistic_markers/EDA-Rehydrated/code
+============================================================
+2026-02-24 20:42:20,006 INFO: ============================================================
+Found 14 step(s) to run:
+2026-02-24 20:42:20,006 INFO: Found 14 step(s) to run:
+  - code_no_cant_tell/data_ingest.py
+2026-02-24 20:42:20,006 INFO:   - code_no_cant_tell/data_ingest.py
+  - code/preprocessing.py
+2026-02-24 20:42:20,006 INFO:   - code/preprocessing.py
+  - code/pos_analysis.py
+2026-02-24 20:42:20,006 INFO:   - code/pos_analysis.py
+  - code/lexical_complexity.py
+2026-02-24 20:42:20,006 INFO:   - code/lexical_complexity.py
+  - code/ma_ttr_mtld_analysis.py
+2026-02-24 20:42:20,006 INFO:   - code/ma_ttr_mtld_analysis.py
+  - code/readability_entropy.py
+2026-02-24 20:42:20,006 INFO:   - code/readability_entropy.py
+  - code/plot_readability.py
+2026-02-24 20:42:20,006 INFO:   - code/plot_readability.py
+  - code/sentiment_emotion.py
+2026-02-24 20:42:20,006 INFO:   - code/sentiment_emotion.py
+  - code/discourse_markers_and_hedges.py
+2026-02-24 20:42:20,006 INFO:   - code/discourse_markers_and_hedges.py
+  - code/marker_analysis.py
+2026-02-24 20:42:20,006 INFO:   - code/marker_analysis.py
+  - code/topic_modeling.py
+2026-02-24 20:42:20,007 INFO:   - code/topic_modeling.py
+  - code/embeddings_and_clustering.py
+2026-02-24 20:42:20,007 INFO:   - code/embeddings_and_clustering.py
+  - code/statistical_tests_and_feature_importance.py
+2026-02-24 20:42:20,007 INFO:   - code/statistical_tests_and_feature_importance.py
+  - code/reporting.py
+2026-02-24 20:42:20,007 INFO:   - code/reporting.py
+
+2026-02-24 20:42:20,007 INFO: 
+============================================================
+2026-02-24 20:42:20,007 INFO: ============================================================
+START data_ingest.py (code_no_cant_tell) at 2026-02-24 20:42:20
+2026-02-24 20:42:20,007 INFO: START data_ingest.py (code_no_cant_tell) at 2026-02-24 20:42:20
+============================================================
+2026-02-24 20:42:20,007 INFO: ============================================================
+✓ data_ingest.py completed successfully
+2026-02-24 20:42:20,355 INFO: ✓ data_ingest.py completed successfully
+END data_ingest.py at 2026-02-24 20:42:20
+2026-02-24 20:42:20,355 INFO: END data_ingest.py at 2026-02-24 20:42:20
+
+2026-02-24 20:42:20,355 INFO: 
+============================================================
+2026-02-24 20:42:20,355 INFO: ============================================================
+START preprocessing.py (code) at 2026-02-24 20:42:20
+2026-02-24 20:42:20,355 INFO: START preprocessing.py (code) at 2026-02-24 20:42:20
+============================================================
+2026-02-24 20:42:20,355 INFO: ============================================================
+END preprocessing.py at 2026-02-24 20:42:38
+2026-02-24 20:42:38,197 INFO: END preprocessing.py at 2026-02-24 20:42:38
+
+2026-02-24 20:42:38,197 INFO: 
+============================================================
+2026-02-24 20:53:04,881 INFO: ============================================================
+RUN (no_cant_tell) START 2026-02-24 20:53:04
+2026-02-24 20:53:04,881 INFO: RUN (no_cant_tell) START 2026-02-24 20:53:04
+SEED=42
+2026-02-24 20:53:04,881 INFO: SEED=42
+EDA directory: /home/husnain/semeval26_psycholinguistic_markers/EDA-Rehydrated
+2026-02-24 20:53:04,881 INFO: EDA directory: /home/husnain/semeval26_psycholinguistic_markers/EDA-Rehydrated
+Binary ingest dir: /home/husnain/semeval26_psycholinguistic_markers/EDA-Rehydrated/code_no_cant_tell
+2026-02-24 20:53:04,881 INFO: Binary ingest dir: /home/husnain/semeval26_psycholinguistic_markers/EDA-Rehydrated/code_no_cant_tell
+Standard code dir: /home/husnain/semeval26_psycholinguistic_markers/EDA-Rehydrated/code
+2026-02-24 20:53:04,881 INFO: Standard code dir: /home/husnain/semeval26_psycholinguistic_markers/EDA-Rehydrated/code
+============================================================
+2026-02-24 20:53:04,881 INFO: ============================================================
+Found 14 step(s) to run:
+2026-02-24 20:53:04,881 INFO: Found 14 step(s) to run:
+  - code_no_cant_tell/data_ingest.py
+2026-02-24 20:53:04,881 INFO:   - code_no_cant_tell/data_ingest.py
+  - code/preprocessing.py
+2026-02-24 20:53:04,881 INFO:   - code/preprocessing.py
+  - code/pos_analysis.py
+2026-02-24 20:53:04,881 INFO:   - code/pos_analysis.py
+  - code/lexical_complexity.py
+2026-02-24 20:53:04,881 INFO:   - code/lexical_complexity.py
+  - code/ma_ttr_mtld_analysis.py
+2026-02-24 20:53:04,881 INFO:   - code/ma_ttr_mtld_analysis.py
+  - code/readability_entropy.py
+2026-02-24 20:53:04,882 INFO:   - code/readability_entropy.py
+  - code/plot_readability.py
+2026-02-24 20:53:04,882 INFO:   - code/plot_readability.py
+  - code/sentiment_emotion.py
+2026-02-24 20:53:04,882 INFO:   - code/sentiment_emotion.py
+  - code/discourse_markers_and_hedges.py
+2026-02-24 20:53:04,882 INFO:   - code/discourse_markers_and_hedges.py
+  - code/marker_analysis.py
+2026-02-24 20:53:04,882 INFO:   - code/marker_analysis.py
+  - code/topic_modeling.py
+2026-02-24 20:53:04,882 INFO:   - code/topic_modeling.py
+  - code/embeddings_and_clustering.py
+2026-02-24 20:53:04,882 INFO:   - code/embeddings_and_clustering.py
+  - code/statistical_tests_and_feature_importance.py
+2026-02-24 20:53:04,882 INFO:   - code/statistical_tests_and_feature_importance.py
+  - code/reporting.py
+2026-02-24 20:53:04,882 INFO:   - code/reporting.py
+
+2026-02-24 20:53:04,882 INFO: 
+============================================================
+2026-02-24 20:53:04,882 INFO: ============================================================
+START data_ingest.py (code_no_cant_tell) at 2026-02-24 20:53:04
+2026-02-24 20:53:04,882 INFO: START data_ingest.py (code_no_cant_tell) at 2026-02-24 20:53:04
+============================================================
+2026-02-24 20:53:04,882 INFO: ============================================================
+✓ data_ingest.py completed successfully
+2026-02-24 20:53:05,233 INFO: ✓ data_ingest.py completed successfully
+END data_ingest.py at 2026-02-24 20:53:05
+2026-02-24 20:53:05,233 INFO: END data_ingest.py at 2026-02-24 20:53:05
+
+2026-02-24 20:53:05,234 INFO: 
+============================================================
+2026-02-24 20:53:05,234 INFO: ============================================================
+START preprocessing.py (code) at 2026-02-24 20:53:05
+2026-02-24 20:53:05,234 INFO: START preprocessing.py (code) at 2026-02-24 20:53:05
+============================================================
+2026-02-24 20:53:05,234 INFO: ============================================================
+END preprocessing.py at 2026-02-24 20:53:24
+2026-02-24 20:53:24,845 INFO: END preprocessing.py at 2026-02-24 20:53:24
+
+2026-02-24 20:53:24,845 INFO: 
+============================================================
+2026-02-24 20:59:05,252 INFO: ============================================================
+RUN (no_cant_tell) START 2026-02-24 20:59:05
+2026-02-24 20:59:05,252 INFO: RUN (no_cant_tell) START 2026-02-24 20:59:05
+SEED=42
+2026-02-24 20:59:05,252 INFO: SEED=42
+EDA directory: /home/husnain/semeval26_psycholinguistic_markers/EDA-Rehydrated
+2026-02-24 20:59:05,252 INFO: EDA directory: /home/husnain/semeval26_psycholinguistic_markers/EDA-Rehydrated
+Binary ingest dir: /home/husnain/semeval26_psycholinguistic_markers/EDA-Rehydrated/code_no_cant_tell
+2026-02-24 20:59:05,252 INFO: Binary ingest dir: /home/husnain/semeval26_psycholinguistic_markers/EDA-Rehydrated/code_no_cant_tell
+Standard code dir: /home/husnain/semeval26_psycholinguistic_markers/EDA-Rehydrated/code
+2026-02-24 20:59:05,252 INFO: Standard code dir: /home/husnain/semeval26_psycholinguistic_markers/EDA-Rehydrated/code
+============================================================
+2026-02-24 20:59:05,252 INFO: ============================================================
+Found 14 step(s) to run:
+2026-02-24 20:59:05,252 INFO: Found 14 step(s) to run:
+  - code_no_cant_tell/data_ingest.py
+2026-02-24 20:59:05,253 INFO:   - code_no_cant_tell/data_ingest.py
+  - code/preprocessing.py
+2026-02-24 20:59:05,253 INFO:   - code/preprocessing.py
+  - code/pos_analysis.py
+2026-02-24 20:59:05,253 INFO:   - code/pos_analysis.py
+  - code/lexical_complexity.py
+2026-02-24 20:59:05,253 INFO:   - code/lexical_complexity.py
+  - code/ma_ttr_mtld_analysis.py
+2026-02-24 20:59:05,253 INFO:   - code/ma_ttr_mtld_analysis.py
+  - code/readability_entropy.py
+2026-02-24 20:59:05,253 INFO:   - code/readability_entropy.py
+  - code/plot_readability.py
+2026-02-24 20:59:05,253 INFO:   - code/plot_readability.py
+  - code/sentiment_emotion.py
+2026-02-24 20:59:05,253 INFO:   - code/sentiment_emotion.py
+  - code/discourse_markers_and_hedges.py
+2026-02-24 20:59:05,253 INFO:   - code/discourse_markers_and_hedges.py
+  - code/marker_analysis.py
+2026-02-24 20:59:05,253 INFO:   - code/marker_analysis.py
+  - code/topic_modeling.py
+2026-02-24 20:59:05,253 INFO:   - code/topic_modeling.py
+  - code/embeddings_and_clustering.py
+2026-02-24 20:59:05,253 INFO:   - code/embeddings_and_clustering.py
+  - code/statistical_tests_and_feature_importance.py
+2026-02-24 20:59:05,253 INFO:   - code/statistical_tests_and_feature_importance.py
+  - code/reporting.py
+2026-02-24 20:59:05,253 INFO:   - code/reporting.py
+
+2026-02-24 20:59:05,253 INFO: 
+============================================================
+2026-02-24 20:59:05,254 INFO: ============================================================
+START data_ingest.py (code_no_cant_tell) at 2026-02-24 20:59:05
+2026-02-24 20:59:05,254 INFO: START data_ingest.py (code_no_cant_tell) at 2026-02-24 20:59:05
+============================================================
+2026-02-24 20:59:05,254 INFO: ============================================================
+✓ data_ingest.py completed successfully
+2026-02-24 20:59:05,726 INFO: ✓ data_ingest.py completed successfully
+END data_ingest.py at 2026-02-24 20:59:05
+2026-02-24 20:59:05,726 INFO: END data_ingest.py at 2026-02-24 20:59:05
+
+2026-02-24 20:59:05,726 INFO: 
+============================================================
+2026-02-24 20:59:05,726 INFO: ============================================================
+START preprocessing.py (code) at 2026-02-24 20:59:05
+2026-02-24 20:59:05,727 INFO: START preprocessing.py (code) at 2026-02-24 20:59:05
+============================================================
+2026-02-24 20:59:05,727 INFO: ============================================================
+✓ preprocessing.py completed successfully
+2026-02-24 21:00:18,388 INFO: ✓ preprocessing.py completed successfully
+END preprocessing.py at 2026-02-24 21:00:18
+2026-02-24 21:00:18,388 INFO: END preprocessing.py at 2026-02-24 21:00:18
+
+2026-02-24 21:00:18,388 INFO: 
+============================================================
+2026-02-24 21:00:18,388 INFO: ============================================================
+START pos_analysis.py (code) at 2026-02-24 21:00:18
+2026-02-24 21:00:18,388 INFO: START pos_analysis.py (code) at 2026-02-24 21:00:18
+============================================================
+2026-02-24 21:00:18,388 INFO: ============================================================
+✓ pos_analysis.py completed successfully
+2026-02-24 21:01:05,861 INFO: ✓ pos_analysis.py completed successfully
+END pos_analysis.py at 2026-02-24 21:01:05
+2026-02-24 21:01:05,861 INFO: END pos_analysis.py at 2026-02-24 21:01:05
+
+2026-02-24 21:01:05,862 INFO: 
+============================================================
+2026-02-24 21:01:05,862 INFO: ============================================================
+START lexical_complexity.py (code) at 2026-02-24 21:01:05
+2026-02-24 21:01:05,862 INFO: START lexical_complexity.py (code) at 2026-02-24 21:01:05
+============================================================
+2026-02-24 21:01:05,862 INFO: ============================================================
+✓ lexical_complexity.py completed successfully
+2026-02-24 21:01:07,766 INFO: ✓ lexical_complexity.py completed successfully
+END lexical_complexity.py at 2026-02-24 21:01:07
+2026-02-24 21:01:07,766 INFO: END lexical_complexity.py at 2026-02-24 21:01:07
+
+2026-02-24 21:01:07,766 INFO: 
+============================================================
+2026-02-24 21:01:07,766 INFO: ============================================================
+START ma_ttr_mtld_analysis.py (code) at 2026-02-24 21:01:07
+2026-02-24 21:01:07,767 INFO: START ma_ttr_mtld_analysis.py (code) at 2026-02-24 21:01:07
+============================================================
+2026-02-24 21:01:07,767 INFO: ============================================================
+✓ ma_ttr_mtld_analysis.py completed successfully
+2026-02-24 21:01:10,649 INFO: ✓ ma_ttr_mtld_analysis.py completed successfully
+END ma_ttr_mtld_analysis.py at 2026-02-24 21:01:10
+2026-02-24 21:01:10,649 INFO: END ma_ttr_mtld_analysis.py at 2026-02-24 21:01:10
+
+2026-02-24 21:01:10,649 INFO: 
+============================================================
+2026-02-24 21:01:10,650 INFO: ============================================================
+START readability_entropy.py (code) at 2026-02-24 21:01:10
+2026-02-24 21:01:10,650 INFO: START readability_entropy.py (code) at 2026-02-24 21:01:10
+============================================================
+2026-02-24 21:01:10,650 INFO: ============================================================
+✓ readability_entropy.py completed successfully
+2026-02-24 21:01:17,553 INFO: ✓ readability_entropy.py completed successfully
+END readability_entropy.py at 2026-02-24 21:01:17
+2026-02-24 21:01:17,554 INFO: END readability_entropy.py at 2026-02-24 21:01:17
+
+2026-02-24 21:01:17,554 INFO: 
+============================================================
+2026-02-24 21:01:17,554 INFO: ============================================================
+START plot_readability.py (code) at 2026-02-24 21:01:17
+2026-02-24 21:01:17,554 INFO: START plot_readability.py (code) at 2026-02-24 21:01:17
+============================================================
+2026-02-24 21:01:17,554 INFO: ============================================================
+✓ plot_readability.py completed successfully
+2026-02-24 21:01:22,008 INFO: ✓ plot_readability.py completed successfully
+END plot_readability.py at 2026-02-24 21:01:22
+2026-02-24 21:01:22,008 INFO: END plot_readability.py at 2026-02-24 21:01:22
+
+2026-02-24 21:01:22,008 INFO: 
+============================================================
+2026-02-24 21:01:22,008 INFO: ============================================================
+START sentiment_emotion.py (code) at 2026-02-24 21:01:22
+2026-02-24 21:01:22,008 INFO: START sentiment_emotion.py (code) at 2026-02-24 21:01:22
+============================================================
+2026-02-24 21:01:22,008 INFO: ============================================================
+✓ sentiment_emotion.py completed successfully
+2026-02-24 21:01:23,899 INFO: ✓ sentiment_emotion.py completed successfully
+END sentiment_emotion.py at 2026-02-24 21:01:23
+2026-02-24 21:01:23,899 INFO: END sentiment_emotion.py at 2026-02-24 21:01:23
+
+2026-02-24 21:01:23,899 INFO: 
+============================================================
+2026-02-24 21:01:23,899 INFO: ============================================================
+START discourse_markers_and_hedges.py (code) at 2026-02-24 21:01:23
+2026-02-24 21:01:23,899 INFO: START discourse_markers_and_hedges.py (code) at 2026-02-24 21:01:23
+============================================================
+2026-02-24 21:01:23,899 INFO: ============================================================
+✓ discourse_markers_and_hedges.py completed successfully
+2026-02-24 21:01:24,456 INFO: ✓ discourse_markers_and_hedges.py completed successfully
+END discourse_markers_and_hedges.py at 2026-02-24 21:01:24
+2026-02-24 21:01:24,456 INFO: END discourse_markers_and_hedges.py at 2026-02-24 21:01:24
+
+2026-02-24 21:01:24,456 INFO: 
+============================================================
+2026-02-24 21:01:24,456 INFO: ============================================================
+START marker_analysis.py (code) at 2026-02-24 21:01:24
+2026-02-24 21:01:24,456 INFO: START marker_analysis.py (code) at 2026-02-24 21:01:24
+============================================================
+2026-02-24 21:01:24,456 INFO: ============================================================
+✓ marker_analysis.py completed successfully
+2026-02-24 21:01:24,824 INFO: ✓ marker_analysis.py completed successfully
+END marker_analysis.py at 2026-02-24 21:01:24
+2026-02-24 21:01:24,824 INFO: END marker_analysis.py at 2026-02-24 21:01:24
+
+2026-02-24 21:01:24,824 INFO: 
+============================================================
+2026-02-24 21:01:24,824 INFO: ============================================================
+START topic_modeling.py (code) at 2026-02-24 21:01:24
+2026-02-24 21:01:24,824 INFO: START topic_modeling.py (code) at 2026-02-24 21:01:24
+============================================================
+2026-02-24 21:01:24,824 INFO: ============================================================
+✗ topic_modeling.py failed with exit code 1
+2026-02-24 21:01:25,186 INFO: ✗ topic_modeling.py failed with exit code 1
+END topic_modeling.py at 2026-02-24 21:01:25
+2026-02-24 21:01:25,186 INFO: END topic_modeling.py at 2026-02-24 21:01:25
+
+2026-02-24 21:01:25,186 INFO: 
+============================================================
+2026-02-24 21:01:25,186 INFO: ============================================================
+START embeddings_and_clustering.py (code) at 2026-02-24 21:01:25
+2026-02-24 21:01:25,186 INFO: START embeddings_and_clustering.py (code) at 2026-02-24 21:01:25
+============================================================
+2026-02-24 21:01:25,186 INFO: ============================================================
+✓ embeddings_and_clustering.py completed successfully
+2026-02-24 21:02:16,572 INFO: ✓ embeddings_and_clustering.py completed successfully
+END embeddings_and_clustering.py at 2026-02-24 21:02:16
+2026-02-24 21:02:16,572 INFO: END embeddings_and_clustering.py at 2026-02-24 21:02:16
+
+2026-02-24 21:02:16,572 INFO: 
+============================================================
+2026-02-24 21:02:16,573 INFO: ============================================================
+START statistical_tests_and_feature_importance.py (code) at 2026-02-24 21:02:16
+2026-02-24 21:02:16,573 INFO: START statistical_tests_and_feature_importance.py (code) at 2026-02-24 21:02:16
+============================================================
+2026-02-24 21:02:16,573 INFO: ============================================================
+✓ statistical_tests_and_feature_importance.py completed successfully
+2026-02-24 21:04:12,663 INFO: ✓ statistical_tests_and_feature_importance.py completed successfully
+END statistical_tests_and_feature_importance.py at 2026-02-24 21:04:12
+2026-02-24 21:04:12,663 INFO: END statistical_tests_and_feature_importance.py at 2026-02-24 21:04:12
+
+2026-02-24 21:04:12,663 INFO: 
+============================================================
+2026-02-24 21:04:12,663 INFO: ============================================================
+START reporting.py (code) at 2026-02-24 21:04:12
+2026-02-24 21:04:12,663 INFO: START reporting.py (code) at 2026-02-24 21:04:12
+============================================================
+2026-02-24 21:04:12,663 INFO: ============================================================
+✓ reporting.py completed successfully
+2026-02-24 21:04:13,025 INFO: ✓ reporting.py completed successfully
+END reporting.py at 2026-02-24 21:04:13
+2026-02-24 21:04:13,025 INFO: END reporting.py at 2026-02-24 21:04:13
+
+2026-02-24 21:04:13,025 INFO: 
+============================================================
+2026-02-24 21:04:13,025 INFO: ============================================================
+RUN (no_cant_tell) SUMMARY
+2026-02-24 21:04:13,025 INFO: RUN (no_cant_tell) SUMMARY
+============================================================
+2026-02-24 21:04:13,025 INFO: ============================================================
+✓ code_no_cant_tell/data_ingest.py
+2026-02-24 21:04:13,025 INFO: ✓ code_no_cant_tell/data_ingest.py
+✓ code/preprocessing.py
+2026-02-24 21:04:13,025 INFO: ✓ code/preprocessing.py
+✓ code/pos_analysis.py
+2026-02-24 21:04:13,025 INFO: ✓ code/pos_analysis.py
+✓ code/lexical_complexity.py
+2026-02-24 21:04:13,026 INFO: ✓ code/lexical_complexity.py
+✓ code/ma_ttr_mtld_analysis.py
+2026-02-24 21:04:13,026 INFO: ✓ code/ma_ttr_mtld_analysis.py
+✓ code/readability_entropy.py
+2026-02-24 21:04:13,026 INFO: ✓ code/readability_entropy.py
+✓ code/plot_readability.py
+2026-02-24 21:04:13,026 INFO: ✓ code/plot_readability.py
+✓ code/sentiment_emotion.py
+2026-02-24 21:04:13,026 INFO: ✓ code/sentiment_emotion.py
+✓ code/discourse_markers_and_hedges.py
+2026-02-24 21:04:13,026 INFO: ✓ code/discourse_markers_and_hedges.py
+✓ code/marker_analysis.py
+2026-02-24 21:04:13,026 INFO: ✓ code/marker_analysis.py
+✗ code/topic_modeling.py
+2026-02-24 21:04:13,026 INFO: ✗ code/topic_modeling.py
+✓ code/embeddings_and_clustering.py
+2026-02-24 21:04:13,026 INFO: ✓ code/embeddings_and_clustering.py
+✓ code/statistical_tests_and_feature_importance.py
+2026-02-24 21:04:13,026 INFO: ✓ code/statistical_tests_and_feature_importance.py
+✓ code/reporting.py
+2026-02-24 21:04:13,026 INFO: ✓ code/reporting.py
+
+2026-02-24 21:04:13,026 INFO: 
+Total: 14 steps
+2026-02-24 21:04:13,026 INFO: Total: 14 steps
+Successful: 13
+2026-02-24 21:04:13,026 INFO: Successful: 13
+Failed: 1
+2026-02-24 21:04:13,027 INFO: Failed: 1
+============================================================
+2026-02-24 21:04:13,027 INFO: ============================================================
+RUN (no_cant_tell) END 2026-02-24 21:04:13
+2026-02-24 21:04:13,027 INFO: RUN (no_cant_tell) END 2026-02-24 21:04:13
+============================================================
+2026-02-24 21:04:13,027 INFO: ============================================================
