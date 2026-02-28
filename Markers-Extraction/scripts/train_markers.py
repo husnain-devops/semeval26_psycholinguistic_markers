@@ -19,7 +19,7 @@ from sklearn.metrics import f1_score
 
 # Configuration
 os.environ['TOKENIZERS_PARALLELISM'] = 'false'
-MODEL_NAME = 'roberta-base'
+MODEL_NAME = 'roberta-large'
 MAX_LENGTH = 256
 VAL_SPLIT = 0.1
 MARKER_TYPES = ['Action', 'Actor', 'Effect', 'Evidence', 'Victim']

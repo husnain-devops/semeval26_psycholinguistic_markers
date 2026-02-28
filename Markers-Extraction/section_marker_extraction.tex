@@ -1,0 +1,20 @@
+% Marker Extraction subsection for the paper
+% Uses: train_rehydrated.jsonl; RoBERTa-large; 90/10 split; CodaBench Overlap F1
+
+\subsection{Marker Extraction}
+
+\subsubsection{Task}
+We address \textbf{span extraction}: for each document, the system predicts a set of character-level spans and assigns each span one of five types---\textit{Actor}, \textit{Action}, \textit{Victim}, \textit{Evidence}, \textit{Effect}. The output is a list of span objects per document, each with \texttt{startIndex}, \texttt{endIndex}, and \texttt{type}.
+
+\subsubsection{Dataset and Splits}
+Training uses \texttt{train\_rehydrated.jsonl}, with fields \texttt{text} and \texttt{markers}. We split the rehydrated data at random (seed 42) into 90\% train and 10\% validation; the split is not stratified by marker type. Official dev and test sets are reserved for inference and evaluation. Predictions are submitted as JSONL with \texttt{\_id} and \texttt{markers} (a list of span objects) to CodaBench.
+
+\subsubsection{Models and Baselines}
+We compare two token-classification setups, both based on \textbf{RoBERTa-large} with LoRA:
+\begin{itemize}
+    \item \textbf{Five-model baseline:} one binary token-classifier per marker type (O vs.\ B-/I- for that type), trained separately; predictions are merged per document. This baseline reaches approximately 0.15 Overlap F1 on the dev set.
+    \item \textbf{Single multi-type model:} one RoBERTa-large token-classifier with a joint BIO scheme over all five types (O plus B-/I- for Actor, Action, Victim, Evidence, Effect), trained on the same 90/10 split with early stopping on validation entity F1.
+\end{itemize}
+
+\subsubsection{Evaluation}
+The primary metric is \textbf{Overlap F1} as defined by CodaBench (character/token overlap between predicted and gold spans). We also report micro-averaged token-level F1, entity-level F1 (non-O labels), and per-marker-type F1 where applicable.

@@ -1,0 +1,44 @@
+% Conspiracy Markers Extraction — refined for paper
+% Uses: train_rehydrated.jsonl; RoBERTa-large + LoRA; 90/10 split; CodaBench Overlap F1
+
+\subsection{Conspiracy Markers Extraction Architecture}
+
+To tackle span extraction, our system predicts a set of character-level spans for each document and assigns each span to one of five target types (\textit{Actor}, \textit{Action}, \textit{Victim}, \textit{Evidence}, \textit{Effect}). Each span is represented by \texttt{startIndex}, \texttt{endIndex}, and \texttt{type}. We compare two token-classification setups, both built on \textbf{RoBERTa-large} and fine-tuned with LoRA (rank $r=16$, $\alpha=32$, applied to \texttt{query}, \texttt{value}, \texttt{key}, and \texttt{dense} projections).
+
+\subsubsection{Dataset and Splits}
+
+Training relies on \texttt{train\_rehydrated.jsonl}, which provides \texttt{text} and \texttt{markers} (character-offset span annotations). We split the rehydrated data randomly (seed 42) into 90\% training and 10\% validation; the split is not stratified by marker type. The official dev and test sets are reserved exclusively for inference and evaluation. Predictions are formatted as JSONL with \texttt{\_id} and \texttt{markers} for CodaBench submission.
+
+\subsubsection{Models and Baselines}
+
+\begin{itemize}
+    \item \textbf{Five-model ensemble:} We train one token-classifier per marker type, each with a 3-label BIO scheme ($O$, $B$-type, $I$-type) for that type only. The five models are trained separately; at inference we merge their predictions per document. We apply class weighting (higher weight on $B$/$I$ vs.\ $O$) to mitigate label imbalance. This setup achieves approximately 0.15 Overlap F1 on the dev set.
+    \item \textbf{Single multi-type model:} We train a single RoBERTa-large token-classifier with a joint BIO scheme over all five types (11 labels: $O$ plus $B$/$I$ for each of Actor, Action, Victim, Evidence, Effect). Training uses early stopping on validation entity F1 (micro F1 over non-$O$ labels) with patience 3.
+\end{itemize}
+
+\subsubsection{Evaluation}
+
+The primary metric is \textbf{Overlap F1}, following the CodaBench definition (character/token overlap between predicted and gold spans). We also track micro-averaged token-level F1 and entity-level F1 (non-$O$ labels) to monitor boundary precision internally.
+
+\begin{table}[ht]
+    \centering
+    \small
+    \renewcommand{\arraystretch}{1.35}
+    \begin{tabular}{l cc}
+        \hline
+        \textbf{Feature} & \textbf{Multi-type} & \textbf{Five-model} \\
+        \hline
+        Label scheme & 11 (joint BIO) & 3 ($O$, $B$, $I$) per type \\
+        Max sequence length & 256 & 512 \\
+        Learning rate & $3\times10^{-4}$ & $2\times10^{-4}$ \\
+        Class weights ($B$/$I$ vs.\ $O$) & No & Yes \\
+        Effective batch size & 16 & 16 \\
+        Epochs / early stopping & 10 / patience 3 & 10 / patience 3 \\
+        LoRA rank $r$ & 16 & 16 \\
+        \hline
+        Dev Overlap F1 & \textit{0.5} & \textit{$\sim$0.15} \\
+        \hline
+    \end{tabular}
+    \caption{Comparative summary of the two marker extraction strategies. Dev Overlap F1 is computed on the official dev set using the CodaBench overlap criterion.}
+    \label{tab:extraction_comparison}
+\end{table}

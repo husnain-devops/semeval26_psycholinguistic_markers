@@ -1,46 +1,33 @@
 import json
 import sys
+from pathlib import Path
 
 import numpy as np
-import os
-import glob
+import torch
 from datasets import Dataset
+from sklearn.metrics import (
+    accuracy_score,
+    classification_report,
+    confusion_matrix,
+    f1_score,
+    precision_recall_fscore_support,
+)
 from transformers import (
-    DistilBertTokenizerFast,
-    DistilBertForSequenceClassification,
+    AutoTokenizer,
+    AutoModelForSequenceClassification,
     Trainer,
     DataCollatorWithPadding,
+    TrainingArguments,
 )
-from transformers import TrainingArguments
 
-# --- Configuration matching the training script ---
-MODEL_PATH = "distilbert-conspiracy-classification"
+# --- Configuration: use local Hugging Face model from hf_models ---
+MODEL_PATH = "/home/husnain/semeval26_psycholinguistic_markers/roberta-large-binary-conspiracy-lora/checkpoint-120"
 TEST_FILE = "dev_rehydrated.jsonl"
+DEV_PUBLIC_FILE = "dev_public.jsonl"  # Ground truth: _id -> conspiracy (Yes/No/Can't tell)
 SUBMISSION_FILE = "submission.jsonl"
-MODEL_NAME = "distilbert-base-uncased"
-LABEL_MAP = {0: "No", 1: "Yes"}
-BATCH_SIZE = 64
-
-
-def find_latest_checkpoint(base_path):
-    """
-    Scans the base_path directory (e.g., 'distilbert-conspiracy-classification')
-    for the latest numbered 'checkpoint-*' subfolder where the model weights are stored.
-    """
-    checkpoint_dirs = glob.glob(os.path.join(base_path, "checkpoint-*"))
-
-    if not checkpoint_dirs:
-        # If no checkpoint folders are found, assume the model files are directly in the base path
-        print(f"Warning: No 'checkpoint-*' folder found. Assuming model files are in: {base_path}")
-        return base_path
-
-    # Sort directories based on the checkpoint number (the integer part after the dash)
-    # This reliably finds the checkpoint with the highest number, which is usually the final one.
-    checkpoint_dirs.sort(key=lambda x: int(os.path.basename(x).split('-')[-1]))
-
-    latest_checkpoint = checkpoint_dirs[-1]
-    print(f"Found latest checkpoint: {latest_checkpoint}")
-    return latest_checkpoint
+MAX_LENGTH = 512
+BATCH_SIZE = 8
+# LABEL_MAP built from loaded config (see main)
 
 
 def load_competition_test_data(file_path):
@@ -65,10 +52,94 @@ def load_competition_test_data(file_path):
 
 
 def tokenize_data(dataset, tokenizer):
-    """Tokenizes the text data using the same approach as the training script."""
-    # This uses tokenizer(examples["text"], truncation=True), mirroring the training script.
-    # DataCollatorWithPadding handles the padding to max length in the batch.
-    return dataset.map(lambda examples: tokenizer(examples["text"], truncation=True), batched=True)
+    """Tokenizes the text data (max_length=MAX_LENGTH) to match the training script."""
+    return dataset.map(
+        lambda examples: tokenizer(
+            examples["text"], truncation=True, max_length=MAX_LENGTH
+        ),
+        batched=True,
+    )
+
+
+def load_dev_public_gold(file_path):
+    """Load dev_public.jsonl ground truth: _id -> conspiracy (Yes/No/Can't tell)."""
+    gold = {}
+    path = Path(file_path)
+    if not path.exists():
+        return gold
+    with open(path, "r") as f:
+        for i, line in enumerate(f):
+            try:
+                item = json.loads(line)
+                _id = item.get("_id")
+                if _id is not None:
+                    gold[_id] = item.get("conspiracy", "")
+            except json.JSONDecodeError:
+                pass
+    return gold
+
+
+def evaluate_vs_dev_public(unique_ids, predicted_labels, gold_path, out_summary_path=None):
+    """
+    Compare predictions to dev_public.jsonl ground truth.
+    Metrics are computed on Yes/No only; 'Can't tell' samples are excluded.
+    """
+    gold = load_dev_public_gold(gold_path)
+    if not gold:
+        print(f"  No ground truth found at {gold_path}. Skipping evaluation.")
+        return
+
+    y_true, y_pred = [], []
+    n_cant_tell = 0
+    for i, _id in enumerate(unique_ids):
+        g = gold.get(_id)
+        if g is None:
+            continue
+        if g not in ("Yes", "No"):
+            n_cant_tell += 1
+            continue
+        y_true.append(g)
+        y_pred.append(predicted_labels[i])
+
+    if n_cant_tell:
+        print(f"  (Excluded {n_cant_tell} dev_public samples with \"Can't tell\" from metrics)")
+
+    if not y_true:
+        print("  No Yes/No ground-truth samples to evaluate.")
+        return
+
+    acc = accuracy_score(y_true, y_pred)
+    f1w = f1_score(y_true, y_pred, labels=["No", "Yes"], average="weighted", zero_division=0)
+    f1m = f1_score(y_true, y_pred, labels=["No", "Yes"], average="macro", zero_division=0)
+    prec, rec, f1_per, _ = precision_recall_fscore_support(
+        y_true, y_pred, labels=["No", "Yes"], average=None, zero_division=0
+    )
+
+    print(f"\n{'='*60}")
+    print("Evaluation vs dev_public.jsonl (ground truth)")
+    print(f"{'='*60}")
+    print(f"  Matched {len(y_true)} samples (Yes/No only).")
+    print(f"  Accuracy:       {acc:.4f}")
+    print(f"  F1 (weighted):  {f1w:.4f}")
+    print(f"  F1 (macro):     {f1m:.4f}")
+    print("\n  Classification report (rows=true, cols=pred):")
+    print(classification_report(y_true, y_pred, labels=["No", "Yes"]))
+    print("  Confusion matrix (rows=true, cols=pred):")
+    print(f"    {confusion_matrix(y_true, y_pred, labels=['No', 'Yes'])}")
+
+    summary = {
+        "accuracy": float(acc),
+        "f1_weighted": float(f1w),
+        "f1_macro": float(f1m),
+        "f1_No": float(f1_per[0]),
+        "f1_Yes": float(f1_per[1]),
+        "n_eval": len(y_true),
+        "n_cant_tell_excluded": n_cant_tell,
+    }
+    if out_summary_path:
+        with open(out_summary_path, "w") as f:
+            json.dump(summary, f, indent=2)
+        print(f"\n  Saved metrics to {out_summary_path}")
 
 
 if __name__ == '__main__':
@@ -85,20 +156,35 @@ if __name__ == '__main__':
     # Store the unique IDs for later submission file generation
     unique_ids = test_dataset["unique_sample_id"]
 
-    # 2. Find and Load Tokenizer/Model
-    model_directory = find_latest_checkpoint(MODEL_PATH)
-
-    print(f"Loading tokenizer from {MODEL_NAME} and trained model from {model_directory}...")
+    # 2. Load Tokenizer and Model from hf_models (local Hugging Face model)
+    model_path = Path(MODEL_PATH).resolve()
+    if not model_path.is_dir():
+        print(f"Error: Model path not found: {model_path}")
+        sys.exit(-1)
+    print(f"Loading tokenizer and model from {model_path}...")
     try:
-        # Load the tokenizer.
-        tokenizer = DistilBertTokenizerFast.from_pretrained(MODEL_NAME)
-        # Load the model structure and weights from the discovered checkpoint directory.
-        model = DistilBertForSequenceClassification.from_pretrained(model_directory)
+        tokenizer = AutoTokenizer.from_pretrained(model_path)
+        model = AutoModelForSequenceClassification.from_pretrained(model_path)
+        config = model.config
+        num_labels = getattr(config, "num_labels", len(getattr(config, "id2label", {})))
+        # Build label map: id -> "No" / "Yes" (binary submission). If model has 3 classes, map third to "No".
+        LABEL_MAP = {}
+        for i in range(num_labels):
+            if i == 0:
+                LABEL_MAP[i] = "No"
+            elif i == 1:
+                LABEL_MAP[i] = "Yes"
+            else:
+                LABEL_MAP[i] = "No"  # for binary submission, map any extra class to No
+        print(f"  Model has {num_labels} label(s). Using LABEL_MAP: {LABEL_MAP}")
     except Exception as e:
-        print(f"Error loading model or tokenizer using path: '{model_directory}'.")
-        print("Please verify that the directory contains 'config.json' and 'model.safetensors' or 'pytorch_model.bin'.")
+        print(f"Error loading model or tokenizer from '{model_path}'.")
         print(f"Details: {e}")
         sys.exit(-1)
+
+    if torch.cuda.is_available():
+        model = model.to("cuda")
+        print("Model moved to GPU.")
 
     # 3. Tokenize Data
     tokenized_test_dataset = tokenize_data(test_dataset, tokenizer)
@@ -147,3 +233,11 @@ if __name__ == '__main__':
         f.write('\n'.join(jsonl_lines) + '\n')
 
     print(f"Submission file '{SUBMISSION_FILE}' generated successfully.")
+
+    # Compare predictions to dev_public.jsonl ground truth (by _id)
+    evaluate_vs_dev_public(
+        list(unique_ids),
+        predicted_labels,
+        DEV_PUBLIC_FILE,
+        out_summary_path="eval_vs_dev_public.json",
+    )
