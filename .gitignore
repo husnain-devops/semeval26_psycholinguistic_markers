@@ -193,6 +193,11 @@ EDA-Rehydrated/notebooks/roberta-base-conspiracy-classification/
 EDA-Rehydrated/notebooks/distilbert-conspiracy-classification/
 EDA-Rehydrated/notebooks/roberta-large-conspiracy-classification/
 EDA-Rehydrated/notebooks/distilbert-conspiracy-classification-with-features/
+EDA-Rehydrated/notebooks/bert-base-conspiracy-classification/
+# Large model/optimizer files (GitHub limit 100 MB)
+*.safetensors
+**/checkpoint-*/model.safetensors
+**/checkpoint-*/optimizer.pt
 distilbert-*
 roberta-base-conspiracy-classification-lora/
 roberta-large-binary-conspiracy-lora/
