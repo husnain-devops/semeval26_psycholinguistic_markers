@@ -1,0 +1,34 @@
+{
+  "micro_f1": 0.226044226044226,
+  "micro_precision": 0.15699658703071673,
+  "micro_recall": 0.40350877192982454,
+  "macro_f1": 0.1904242723694593,
+  "iou_threshold": 0.5,
+  "per_type": {
+    "Action": {
+      "tp": 28,
+      "pred": 232,
+      "gold": 104
+    },
+    "Actor": {
+      "tp": 99,
+      "pred": 441,
+      "gold": 136
+    },
+    "Effect": {
+      "tp": 10,
+      "pred": 124,
+      "gold": 71
+    },
+    "Evidence": {
+      "tp": 10,
+      "pred": 152,
+      "gold": 73
+    },
+    "Victim": {
+      "tp": 37,
+      "pred": 223,
+      "gold": 72
+    }
+  }
+}

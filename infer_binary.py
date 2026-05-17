@@ -2,7 +2,9 @@ import json
 import sys
 from pathlib import Path
 
+import matplotlib.pyplot as plt
 import numpy as np
+import seaborn as sns
 import torch
 from datasets import Dataset
 from sklearn.metrics import (
@@ -124,8 +126,35 @@ def evaluate_vs_dev_public(unique_ids, predicted_labels, gold_path, out_summary_
     print(f"  F1 (macro):     {f1m:.4f}")
     print("\n  Classification report (rows=true, cols=pred):")
     print(classification_report(y_true, y_pred, labels=["No", "Yes"]))
+    cm = confusion_matrix(y_true, y_pred, labels=["No", "Yes"])
     print("  Confusion matrix (rows=true, cols=pred):")
-    print(f"    {confusion_matrix(y_true, y_pred, labels=['No', 'Yes'])}")
+    print(f"    {cm}")
+
+    figures_dir = Path("figures")
+    figures_dir.mkdir(parents=True, exist_ok=True)
+    cm_path = figures_dir / "eval_vs_dev_public_confusion_matrix.png"
+
+    # Keep logical plot size reasonable so text remains readable,
+    # and increase output density via DPI for a crisp PNG.
+    plt.figure(figsize=(8, 6))
+    sns.heatmap(
+        cm,
+        annot=True,
+        fmt="d",
+        cmap="Blues",
+        xticklabels=["No", "Yes"],
+        yticklabels=["No", "Yes"],
+        annot_kws={"size": 20},
+    )
+    #plt.title("Confusion Matrix - dev_public")
+    plt.xlabel("Predicted", fontsize=20)
+    plt.ylabel("Actual", fontsize=20)
+    plt.xticks(fontsize=20)
+    plt.yticks(fontsize=20)
+    plt.tight_layout()
+    plt.savefig(cm_path, dpi=400, bbox_inches="tight")
+    plt.close()
+    print(f"  Saved confusion matrix image to {cm_path}")
 
     summary = {
         "accuracy": float(acc),

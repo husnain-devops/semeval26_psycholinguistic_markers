@@ -3,6 +3,7 @@ Copy of infer_5_models.py that runs on dev_rehydrated.jsonl, uses dev_public.jso
 as gold markers, and computes span-overlap F1 for extracted markers.
 """
 import json
+import re
 import torch
 import numpy as np
 from pathlib import Path
@@ -14,6 +15,7 @@ DEV_REHYDRATED_FILE = PROJECT_ROOT / "dev_rehydrated.jsonl"
 DEV_PUBLIC_FILE = PROJECT_ROOT / "dev_public.jsonl"
 MARKER_TYPES = ["Action", "Actor", "Effect", "Evidence", "Victim"]
 MAX_LENGTH = 512
+IOU_THRESHOLD = 0.5
 
 
 def load_dev_data():
@@ -28,47 +30,85 @@ def load_dev_data():
     return dev_rehydrated, gold_by_id
 
 
-def spans_overlap(a_start, a_end, b_start, b_end):
-    """True if character ranges [a_start, a_end) and [b_start, b_end) overlap."""
-    return not (a_end <= b_start or b_end <= a_start)
-
-
-def count_matched_spans(pred_spans, gold_spans, by_type=True):
+def tokenize_text(text):
     """
-    Greedy 1-to-1 matching: count how many pred spans match a gold span (same type, overlapping).
-    pred_spans / gold_spans: list of {"startIndex", "endIndex", "type"}.
-    Returns (tp, n_pred, n_gold) per type if by_type else micro (single totals).
+    Tokenization used by starter-pack eval_token.py.
+    Returns list of (start_char, end_char) token spans.
     """
-    if by_type:
-        types = set(s["type"] for s in pred_spans) | set(s["type"] for s in gold_spans)
-        out = {}
-        for t in types:
-            p = [x for x in pred_spans if x["type"] == t]
-            g = [x for x in gold_spans if x["type"] == t]
-            tp = _match_count(p, g)
-            out[t] = (tp, len(p), len(g))
-        return out
-    tp = _match_count(pred_spans, gold_spans)
-    return tp, len(pred_spans), len(gold_spans)
+    token_spans = []
+    for match in re.finditer(r"(\w+|[^\w\s])", text):
+        token_spans.append((match.start(), match.end()))
+    return token_spans
 
 
-def _match_count(pred_list, gold_list):
-    """Greedy match: each pred matches at most one gold (same type, overlap)."""
-    pred_list = list(pred_list)
-    gold_list = list(gold_list)
-    matched_gold = set()
-    tp = 0
-    for p in pred_list:
-        ps, pe = p["startIndex"], p["endIndex"]
-        for j, g in enumerate(gold_list):
-            if j in matched_gold:
+def char_span_to_token_set(char_start, char_end, token_spans):
+    """Convert character span to covered token index set."""
+    covered_token_indices = set()
+    for token_idx, (t_start, t_end) in enumerate(token_spans):
+        if char_start < t_end and char_end > t_start:
+            covered_token_indices.add(token_idx)
+    return covered_token_indices
+
+
+def calculate_token_iou(set_a, set_b):
+    """IoU over token index sets."""
+    if not set_a and not set_b:
+        return 1.0
+    union = set_a.union(set_b)
+    if not union:
+        return 0.0
+    intersection = set_a.intersection(set_b)
+    return len(intersection) / len(union)
+
+
+def count_matched_spans_token_iou(pred_spans, gold_spans, token_spans, iou_threshold=IOU_THRESHOLD):
+    """
+    Starter-pack-style matching:
+    For each gold span, find best unmatched predicted span of same type by token IoU.
+    Count TP if best IoU >= threshold. Then FP/FN from unmatched spans.
+    """
+    # Copy spans with mutable matched flags
+    pred = [
+        {"start": p["startIndex"], "end": p["endIndex"], "type": p["type"], "matched": False}
+        for p in pred_spans
+        if p.get("type") in MARKER_TYPES
+    ]
+    gold = [
+        {"start": g["startIndex"], "end": g["endIndex"], "type": g["type"], "matched": False}
+        for g in gold_spans
+        if g.get("type") in MARKER_TYPES
+    ]
+
+    per_type = {t: {"tp": 0, "fp": 0, "fn": 0} for t in MARKER_TYPES}
+
+    for true_span in gold:
+        true_token_set = char_span_to_token_set(true_span["start"], true_span["end"], token_spans)
+        best_iou = -1.0
+        best_pred_idx = -1
+
+        for pred_idx, pred_span in enumerate(pred):
+            if pred_span["matched"] or pred_span["type"] != true_span["type"]:
                 continue
-            gs, ge = g["startIndex"], g["endIndex"]
-            if spans_overlap(ps, pe, gs, ge):
-                matched_gold.add(j)
-                tp += 1
-                break
-    return tp
+            pred_token_set = char_span_to_token_set(pred_span["start"], pred_span["end"], token_spans)
+            iou = calculate_token_iou(true_token_set, pred_token_set)
+            if iou > best_iou:
+                best_iou = iou
+                best_pred_idx = pred_idx
+
+        if best_pred_idx != -1 and best_iou >= iou_threshold:
+            true_span["matched"] = True
+            pred[best_pred_idx]["matched"] = True
+            per_type[true_span["type"]]["tp"] += 1
+
+    for true_span in gold:
+        if not true_span["matched"]:
+            per_type[true_span["type"]]["fn"] += 1
+
+    for pred_span in pred:
+        if not pred_span["matched"]:
+            per_type[pred_span["type"]]["fp"] += 1
+
+    return per_type
 
 
 def run_inference(dev_data):
@@ -131,7 +171,7 @@ def run_inference(dev_data):
 
 
 def compute_f1(dev_data, gold_by_id, all_results):
-    """Compute span-overlap F1 per type and micro-averaged."""
+    """Compute starter-pack-compatible token-IoU F1 per type + micro/macro."""
     per_type = {t: {"tp": 0, "pred": 0, "gold": 0} for t in MARKER_TYPES}
     micro = {"tp": 0, "pred": 0, "gold": 0}
 
@@ -139,19 +179,28 @@ def compute_f1(dev_data, gold_by_id, all_results):
         _id = item["_id"]
         pred_spans = all_results[i]
         gold_spans = gold_by_id.get(_id, [])
-        # Normalize gold: keep only startIndex, endIndex, type (same as pred)
+        token_spans = tokenize_text(item["text"])
+
+        # Normalize gold: keep only startIndex, endIndex, type
         gold_spans = [
             {"startIndex": m["startIndex"], "endIndex": m["endIndex"], "type": m["type"]}
             for m in gold_spans
+            if m.get("type") in MARKER_TYPES
         ]
-        by_type = count_matched_spans(pred_spans, gold_spans, by_type=True)
-        for t, (tp, n_pred, n_gold) in by_type.items():
+
+        matched = count_matched_spans_token_iou(
+            pred_spans, gold_spans, token_spans, iou_threshold=IOU_THRESHOLD
+        )
+        for t in MARKER_TYPES:
+            tp = matched[t]["tp"]
+            fp = matched[t]["fp"]
+            fn = matched[t]["fn"]
             per_type[t]["tp"] += tp
-            per_type[t]["pred"] += n_pred
-            per_type[t]["gold"] += n_gold
+            per_type[t]["pred"] += (tp + fp)
+            per_type[t]["gold"] += (tp + fn)
             micro["tp"] += tp
-            micro["pred"] += n_pred
-            micro["gold"] += n_gold
+            micro["pred"] += (tp + fp)
+            micro["gold"] += (tp + fn)
 
     def p_r_f1(tp, pred, gold):
         p = tp / pred if pred else 0.0
@@ -160,16 +209,25 @@ def compute_f1(dev_data, gold_by_id, all_results):
         return p, r, f1
 
     print("\n" + "=" * 60)
-    print("Span-overlap F1 (dev_rehydrated predictions vs dev_public gold)")
+    print(f"Token-IoU Overlap F1 @ IoU>={IOU_THRESHOLD} (dev_rehydrated predictions vs dev_public gold)")
     print("=" * 60)
+    f1_scores = []
     for t in MARKER_TYPES:
         d = per_type[t]
         p, r, f1 = p_r_f1(d["tp"], d["pred"], d["gold"])
+        f1_scores.append(f1)
         print(f"  {t:10}  P: {p:.4f}  R: {r:.4f}  F1: {f1:.4f}  (tp={d['tp']} pred={d['pred']} gold={d['gold']})")
+    macro_f1 = float(np.mean(f1_scores)) if f1_scores else 0.0
     p, r, f1 = p_r_f1(micro["tp"], micro["pred"], micro["gold"])
     print(f"  {'MICRO':10}  P: {p:.4f}  R: {r:.4f}  F1: {f1:.4f}  (tp={micro['tp']} pred={micro['pred']} gold={micro['gold']})")
+    print(f"  {'MACRO':10}  F1: {macro_f1:.4f}")
     print("=" * 60)
-    return {"micro": {"precision": p, "recall": r, "f1": f1}, "per_type": per_type}
+    return {
+        "micro": {"precision": p, "recall": r, "f1": f1},
+        "macro_f1": macro_f1,
+        "per_type": per_type,
+        "iou_threshold": IOU_THRESHOLD,
+    }
 
 
 def main():
@@ -196,6 +254,8 @@ def main():
                 "micro_f1": metrics["micro"]["f1"],
                 "micro_precision": metrics["micro"]["precision"],
                 "micro_recall": metrics["micro"]["recall"],
+                "macro_f1": metrics["macro_f1"],
+                "iou_threshold": metrics["iou_threshold"],
                 "per_type": metrics["per_type"],
             },
             f,
