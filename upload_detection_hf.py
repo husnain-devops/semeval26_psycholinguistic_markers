@@ -16,6 +16,13 @@ from pathlib import Path
 
 from datetime import datetime
 
+from upload_hf_model_card import (
+    card_path_for,
+    default_cards_dir,
+    render_model_card,
+    upload_model_card,
+)
+
 
 def require():
     try:
@@ -76,6 +83,12 @@ def main():
         help="Use this string as datetime suffix instead of now() (e.g. from upload_all_hf)",
     )
     parser.add_argument("--token", type=str, default=None, help="HF token (or use huggingface-cli login)")
+    parser.add_argument(
+        "--model-cards-dir",
+        type=str,
+        default=str(default_cards_dir()),
+        help="Directory with detection.md model card template (set empty to skip)",
+    )
     parser.add_argument("--dry-run", action="store_true", help="Print repo ID and paths only, do not upload")
     args = parser.parse_args()
 
@@ -120,6 +133,22 @@ def main():
     print(f"Pushing to {repo_id}...")
     model.push_to_hub(repo_id, private=False)
     tokenizer.push_to_hub(repo_id, private=False)
+
+    if args.model_cards_dir:
+        cards_dir = Path(args.model_cards_dir)
+        template = card_path_for(cards_dir, detection=True)
+        if template.exists():
+            readme = render_model_card(
+                template,
+                repo_id=repo_id,
+                base_model=base_model,
+                upload_datetime=dt,
+            )
+            print(f"Uploading model card from {template}...")
+            upload_model_card(api, repo_id, readme)
+        else:
+            print(f"Warning: model card not found at {template}, skipping README upload.")
+
     print(f"Done. https://huggingface.co/{repo_id}")
 
 

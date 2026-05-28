@@ -15,6 +15,13 @@ from pathlib import Path
 
 from datetime import datetime
 
+from upload_hf_model_card import (
+    card_path_for,
+    default_cards_dir,
+    render_model_card,
+    upload_model_card,
+)
+
 MARKER_TYPES = ["Action", "Actor", "Effect", "Evidence", "Victim"]
 
 
@@ -61,6 +68,12 @@ def main():
         help="Use this string as datetime suffix instead of now() (e.g. from upload_all_hf)",
     )
     parser.add_argument("--token", type=str, default=None, help="HF token (or use huggingface-cli login)")
+    parser.add_argument(
+        "--model-cards-dir",
+        type=str,
+        default=str(default_cards_dir()),
+        help="Directory with extraction_{Marker}.md templates (set empty to skip)",
+    )
     parser.add_argument("--dry-run", action="store_true", help="Print repo IDs and paths only, do not upload")
     parser.add_argument(
         "--markers",
@@ -118,6 +131,22 @@ def main():
                 repo_id=repo_id,
                 repo_type="model",
             )
+
+        if args.model_cards_dir:
+            cards_dir = Path(args.model_cards_dir)
+            template = card_path_for(cards_dir, marker_type=marker_type)
+            if template.exists():
+                readme = render_model_card(
+                    template,
+                    repo_id=repo_id,
+                    base_model="roberta-large",
+                    upload_datetime=dt,
+                )
+                print(f"  Uploading model card from {template}...")
+                upload_model_card(api, repo_id, readme)
+            else:
+                print(f"  Warning: model card not found at {template}, skipping README upload.")
+
         print(f"  Done. https://huggingface.co/{repo_id}")
 
     if args.dry_run:

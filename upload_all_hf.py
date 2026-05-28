@@ -17,6 +17,8 @@ from pathlib import Path
 
 from datetime import datetime
 
+from upload_hf_model_card import default_cards_dir
+
 
 def main():
     root = Path(__file__).resolve().parent
@@ -32,6 +34,17 @@ def main():
     parser.add_argument("--token", type=str, default=None, help="HF token")
     parser.add_argument("--dry-run", action="store_true", help="Dry run for both scripts")
     parser.add_argument("--datetime-fmt", type=str, default="%Y-%m-%d-%H%M", help="DateTime format for repo IDs")
+    parser.add_argument(
+        "--model-cards-dir",
+        type=str,
+        default=str(default_cards_dir()),
+        help="Directory with detection.md and extraction_{Marker}.md templates",
+    )
+    parser.add_argument(
+        "--skip-model-cards",
+        action="store_true",
+        help="Do not upload README model cards",
+    )
     args = parser.parse_args()
 
     do_detection = not args.extraction_only
@@ -52,6 +65,10 @@ def main():
             cmd += ["--token", args.token]
         if args.dry_run:
             cmd.append("--dry-run")
+        if not args.skip_model_cards and args.model_cards_dir:
+            cmd += ["--model-cards-dir", args.model_cards_dir]
+        elif args.skip_model_cards:
+            cmd += ["--model-cards-dir", ""]
         cmd += extra
         return subprocess.run(cmd, cwd=str(root), env=env).returncode
 
