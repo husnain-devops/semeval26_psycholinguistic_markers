@@ -1,0 +1,31 @@
+# PDTB-style explicit causal / result connectives.
+# kind<TAB>phrase
+# kind is one of:
+#   matrix   = consequence is the other (matrix) clause  (X because Y → X)
+#   follow   = consequence follows the connective         (therefore Y → Y)
+#   follow_np = consequence is the following NP/clause    (leading to Y → Y)
+matrix	because
+matrix	because of
+matrix	since
+matrix	due to
+matrix	owing to
+follow	therefore
+follow	thus
+follow	hence
+follow	consequently
+follow	accordingly
+follow	as a result
+follow	as a consequence
+follow	for this reason
+follow	so that
+follow	so
+follow_np	leading to
+follow_np	led to
+follow_np	leads to
+follow_np	resulting in
+follow_np	resulted in
+follow_np	results in
+follow_np	causing
+follow_np	caused
+follow_np	which caused
+follow_np	which led to

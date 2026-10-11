@@ -1,0 +1,6 @@
+# Incremental deps on top of EDA-Rehydrated/requirements.txt
+# (spacy 3.8 + en_core_web_sm are already pinned there).
+spacy>=3.7
+textacy>=0.13.0
+fastcoref>=2.1.6
+# transformers + torch already in the EDA stack; needed only if --srl hf
