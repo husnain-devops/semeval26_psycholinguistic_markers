@@ -1,0 +1,76 @@
+{
+  "n_samples": 4316,
+  "n_train": 3884,
+  "n_val": 432,
+  "iou_overlap_threshold": 0.5,
+  "status_counts": {
+    "exact": 5565,
+    "overlap": 4335,
+    "partial": 3833,
+    "missed": 8232,
+    "false_positive": 41151,
+    "out_of_window": 0
+  },
+  "per_type": {
+    "Action": {
+      "exact": 394,
+      "overlap": 976,
+      "partial": 1402,
+      "missed": 2069,
+      "false_positive": 7762,
+      "out_of_window": 0
+    },
+    "Actor": {
+      "exact": 3286,
+      "overlap": 1407,
+      "partial": 673,
+      "missed": 1050,
+      "false_positive": 14737,
+      "out_of_window": 0
+    },
+    "Effect": {
+      "exact": 172,
+      "overlap": 452,
+      "partial": 615,
+      "missed": 2500,
+      "false_positive": 4922,
+      "out_of_window": 0
+    },
+    "Evidence": {
+      "exact": 441,
+      "overlap": 808,
+      "partial": 784,
+      "missed": 1621,
+      "false_positive": 6156,
+      "out_of_window": 0
+    },
+    "Victim": {
+      "exact": 1272,
+      "overlap": 692,
+      "partial": 359,
+      "missed": 992,
+      "false_positive": 7574,
+      "out_of_window": 0
+    }
+  },
+  "per_split": {
+    "train": {
+      "exact": 5091,
+      "overlap": 3940,
+      "partial": 3414,
+      "missed": 7337,
+      "false_positive": 36909,
+      "out_of_window": 0
+    },
+    "val": {
+      "exact": 474,
+      "overlap": 395,
+      "partial": 419,
+      "missed": 895,
+      "false_positive": 4242,
+      "out_of_window": 0
+    }
+  },
+  "jsonl": "/home/husnain/semeval26_psycholinguistic_markers/Markers-Extraction/error_analysis/train_marker_gold_vs_pred.jsonl",
+  "tsv": "/home/husnain/semeval26_psycholinguistic_markers/Markers-Extraction/error_analysis/train_marker_gold_vs_pred.tsv"
+}
