@@ -1,0 +1,57 @@
+# Extended from EDA-Rehydrated/code/discourse_markers_and_hedges.py
+# kind<TAB>phrase
+hedge	maybe
+hedge	perhaps
+hedge	could be
+hedge	might
+hedge	seems
+hedge	seemingly
+hedge	possibly
+hedge	possible
+hedge	may be
+hedge	may
+hedge	apparently
+hedge	allegedly
+hedge	supposedly
+hedge	reportedly
+hedge	arguably
+hedge	presumably
+hedge	likely
+hedge	unlikely
+hedge	suggests
+hedge	suggested
+hedge	appears
+hedge	appear to
+hedge	tend to
+hedge	sort of
+hedge	kind of
+hedge	somewhat
+hedge	I think
+hedge	I guess
+hedge	not sure
+certainty	definitely
+certainty	certainly
+certainty	proof
+certainty	proven
+certainty	prove
+certainty	undeniable
+certainty	obviously
+certainty	clearly
+certainty	undoubtedly
+certainty	without a doubt
+certainty	no doubt
+certainty	irrefutable
+certainty	fact
+certainty	the truth
+certainty	must be
+certainty	always
+certainty	never
+certainty	everyone knows
+discourse	actually
+discourse	in fact
+discourse	the truth
+discourse	frankly
+discourse	to be honest
+discourse	needless to say
+discourse	of course
+discourse	as we all know

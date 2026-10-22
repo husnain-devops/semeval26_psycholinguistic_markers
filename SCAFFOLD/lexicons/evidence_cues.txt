@@ -1,0 +1,82 @@
+# Evidential / source cues for the macro argument miner.
+# kind<TAB>phrase
+#   cue     = the phrase itself is a candidate Evidence span
+#   report  = reporting verb; take a short complement if present
+cue	according to
+cue	article
+cue	articles
+cue	study
+cue	studies
+cue	research
+cue	report
+cue	reports
+cue	reported
+cue	source
+cue	sources
+cue	document
+cue	documents
+cue	paper
+cue	papers
+cue	footage
+cue	video
+cue	videos
+cue	photo
+cue	photos
+cue	leak
+cue	leaked
+cue	leaks
+cue	whistleblower
+cue	whistleblowers
+cue	proof
+cue	evidence
+cue	data
+cue	statistics
+cue	figures
+cue	records
+cue	email
+cue	emails
+cue	memo
+cue	testimony
+cue	interview
+cue	investigation
+cue	findings
+cue	peer reviewed
+cue	peer-reviewed
+cue	published
+cue	journal
+cue	scientist
+cue	scientists
+cue	expert
+cue	experts
+cue	official
+cue	officials
+cue	they admitted
+cue	data shows
+cue	research shows
+cue	studies show
+cue	it is known
+cue	as shown
+cue	as reported
+cue	see also
+cue	citation
+cue	cited
+report	admitted
+report	revealed
+report	showed
+report	shows
+report	claimed
+report	claims
+report	stated
+report	states
+report	reported
+report	confirmed
+report	confirms
+report	disclosed
+report	testified
+report	alleged
+report	alleges
+report	argued
+report	proved
+report	demonstrated
+report	found
+report	announced
